@@ -2,11 +2,11 @@ import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import SideBar from "../components/Partials/SideBar";
+import EditClassroom from "../components/Classroom/EditClassroom";
 import FormClassroom from "../components/Classroom/FormClassroom";
 import ListClassroom from "../components/Classroom/ListClassroom";
-import EditClassroom from "../components/Classroom/EditClassroom";
 import ViewClassroom from "../components/Classroom/ViewClassroom";
+import SideBar from "../components/Partials/SideBar";
 
 const { Header, Content, Footer } = Layout;
 
