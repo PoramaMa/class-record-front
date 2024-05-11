@@ -1,29 +1,12 @@
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, TeamOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
 const { Sider } = Layout;
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined,
-].map((icon, index) => ({
+const menuItem = ["Student Management", "ClassRoom Management"];
+const items = [TeamOutlined, AppstoreOutlined].map((icon, index) => ({
   key: String(index + 1),
   icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
+  label: menuItem[index],
 }));
 const SideBar = () => {
   return (
@@ -42,7 +25,7 @@ const SideBar = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["4"]}
+          defaultSelectedKeys={["1"]}
           items={items}
         />
       </Sider>
