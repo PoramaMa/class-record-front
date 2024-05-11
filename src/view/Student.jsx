@@ -42,6 +42,7 @@ const Student = () => {
           style={{
             margin: "24px 16px 0",
             overflow: "initial",
+            minHeight: "80vh",
           }}
         >
           <h3>Student Management </h3>

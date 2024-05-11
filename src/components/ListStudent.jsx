@@ -1,28 +1,33 @@
 import { Avatar, Divider, List, Skeleton } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { env } from "../env";
+
+const url = `${env.service_url}`;
+
 const ListStudent = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const loadMoreData = () => {
+
+  const [dataStudentAll, setStudentAll] = useState([]);
+
+  const fetchStudentAll = async () => {
     if (loading) {
       return;
     }
     setLoading(true);
-    fetch(
-      "https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo"
-    )
-      .then((res) => res.json())
-      .then((body) => {
-        setData([...data, ...body.results]);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    try {
+      const response = await axios.get(`${url}/students`);
+      setStudentAll(response.data);
+    } catch (err) {
+      console.log("fetchStudentAll err :: ", err);
+    } finally {
+      setLoading(false);
+    }
   };
+
   useEffect(() => {
-    loadMoreData();
+    fetchStudentAll();
   }, []);
   return (
     <div
@@ -35,9 +40,9 @@ const ListStudent = () => {
       }}
     >
       <InfiniteScroll
-        dataLength={data.length}
-        next={loadMoreData}
-        hasMore={data.length < 50}
+        dataLength={dataStudentAll.length}
+        next={fetchStudentAll}
+        hasMore={dataStudentAll.length < 0}
         loader={
           <Skeleton
             avatar
@@ -51,13 +56,17 @@ const ListStudent = () => {
         scrollableTarget="scrollableDiv"
       >
         <List
-          dataSource={data}
+          dataSource={dataStudentAll}
           renderItem={(item) => (
-            <List.Item key={item.email}>
+            <List.Item key={item.fname}>
               <List.Item.Meta
-                avatar={<Avatar src={item.picture.large} />}
-                title={<a href="https://ant.design">{item.name.last}</a>}
-                description={item.email}
+                avatar={<Avatar src={item.fname} />}
+                title={
+                  <a href="https://ant.design">
+                    {item.title} {item.fname} {item.lname}
+                  </a>
+                }
+                description={"เลขประจำตัว " + item.student_code}
               />
               <div>Content</div>
             </List.Item>
