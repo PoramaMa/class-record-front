@@ -11,18 +11,19 @@ const ViewClassroom = () => {
 
   const [dataStudent, setStudent] = useState([]);
 
-  const fetchStudentById = async () => {
+  const fetchStudentById = async (id) => {
     try {
       const response = await axios.get(`${url}/students/${atob(id)}`);
       setStudent(response.data);
+      console.log(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
     }
   };
 
   useEffect(() => {
-    fetchStudentById();
-  }, []);
+    fetchStudentById(id);
+  }, [id]);
 
   return (
     <Space
@@ -33,9 +34,16 @@ const ViewClassroom = () => {
       }}
     >
       <Card title="ข้อมูลนักเรียน" extra={<a href="#">More</a>}>
-        <h4>ข้อมูลส่วนตัว</h4>
-        <p>Card content</p>
-        <p>Card content</p>
+        <h3>ข้อมูลส่วนตัว</h3>
+        <p>
+          <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}
+          {dataStudent.lname}
+        </p>
+        <p>
+          {" "}
+          <b>เพศ : </b>
+          {dataStudent.gender}
+        </p>
       </Card>
     </Space>
   );

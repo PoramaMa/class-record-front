@@ -92,11 +92,11 @@ const ListStudent = () => {
                     {item.title} {item.fname} {item.lname}
                   </a>
                 }
-                description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
+                description={`เลขประจำตัว ${item.student_code}, ${item.grade_level}`}
               />
               <Link
                 to={`/view-student/${btoa(
-                  item.classroom_id
+                  item.student_id
                 )}?_=${uuidv4()}&ref=detail`}
               >
                 <Button type="primary" style={{ "margin-right": "5px" }}>
