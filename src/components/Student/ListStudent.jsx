@@ -2,6 +2,8 @@ import { Avatar, Button, Divider, List, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
 
@@ -69,9 +71,9 @@ const ListStudent = () => {
                 }
                 description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
-              <div>
+              <Link to={`/view-student/${btoa(item.student_id)}?_=${uuidv4()}`}>
                 <Button type="primary">รายละเอียด</Button>
-              </div>
+              </Link>
             </List.Item>
           )}
         />
