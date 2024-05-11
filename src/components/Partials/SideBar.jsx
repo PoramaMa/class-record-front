@@ -42,12 +42,12 @@ const items = [
       {
         key: "4",
         label: "List all",
-        path: "/classrooms",
+        path: "/classrooms?ref=all",
       },
       {
         key: "5",
         label: "Add classroom",
-        path: "/add-classroom",
+        path: "/add-classroom?ref=add",
       },
     ],
   },

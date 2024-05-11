@@ -26,6 +26,14 @@ const router = createBrowserRouter([
     path: "/classrooms",
     element: <ClassRoom />,
   },
+  {
+    path: "/add-classroom",
+    element: <ClassRoom />,
+  },
+  {
+    path: "/view-classroom/:id",
+    element: <ClassRoom />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
