@@ -14,8 +14,20 @@ const ViewClassroom = () => {
   const fetchStudentById = async (id) => {
     try {
       const response = await axios.get(`${url}/students/${atob(id)}`);
-      console.log(response.data);
       setStudent(response.data);
+    } catch (err) {
+      console.log("fetchStudentById err :: ", err);
+    }
+  };
+
+  const [dataClassroom, setClassroom] = useState([]);
+  const fetchClassroomById = async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/classrooms/students/${atob(id)}`
+      );
+      console.log("dataClassroom :: ", response.data);
+      setClassroom(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
     }
@@ -23,6 +35,7 @@ const ViewClassroom = () => {
 
   useEffect(() => {
     fetchStudentById(id);
+    fetchClassroomById(id);
   }, []);
 
   const formatDateThai = (isoDateString) => {
@@ -66,61 +79,22 @@ const ViewClassroom = () => {
   const columns = [
     {
       title: "เลขห้อง",
-      dataIndex: "classrooms.room_number",
-      key: "classrooms.room_number",
+      dataIndex: "room_number",
+      key: "room_number",
     },
     {
-      title: "Age",
-      dataIndex: "createdAt",
-      key: "createdAt",
+      title: "ชื่อห้อง",
+      dataIndex: "room_name",
+      key: "room_name",
     },
     {
-      title: "Address",
-      dataIndex: "student_id",
-      key: "student_id",
+      title: "ครูประจำชั้น",
+      dataIndex: "teacher_name",
+      key: "teacher_name",
     },
   ];
 
-  const dataSource = [
-    {
-      class_map_id: 7,
-      student_id: 1,
-      classroom_id: 1,
-      isActive: true,
-      createdAt: "2024-05-11T19:41:40.000Z",
-      updatedAt: "2024-05-11T19:41:40.000Z",
-      classrooms: {
-        classroom_id: 1,
-        room_number: "221",
-        room_name: "ห้องดนตรี",
-        grade_level: "1",
-        academic_year: 2567,
-        teacher_name: "ครูสมชาย",
-        isActive: true,
-        createdAt: "2024-05-11T18:14:54.000Z",
-        updatedAt: "2024-05-11T18:14:54.000Z",
-      },
-    },
-    {
-      class_map_id: 9,
-      student_id: 1,
-      classroom_id: 2,
-      isActive: true,
-      createdAt: "2024-05-11T19:42:03.000Z",
-      updatedAt: "2024-05-11T19:42:03.000Z",
-      classrooms: {
-        classroom_id: 2,
-        room_number: "222",
-        room_name: "ห้องคอมพิวเตอร์",
-        grade_level: "1",
-        academic_year: 2567,
-        teacher_name: "ครูสมหญิง",
-        isActive: true,
-        createdAt: "2024-05-11T18:20:25.000Z",
-        updatedAt: "2024-05-11T18:20:25.000Z",
-      },
-    },
-  ];
+  const dataSource = dataClassroom;
 
   return (
     <Space
