@@ -1,4 +1,4 @@
-import { Avatar, Button, List, Modal, Skeleton, Table } from "antd";
+import { Avatar, Button, List, Modal, Skeleton, Table, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -97,9 +97,22 @@ const StudentInClass = () => {
       key: "grade_level",
     },
     {
-      title: "ลบ",
-      dataIndex: "",
-      key: "",
+      title: "Action",
+      key: "action",
+      render: (_, dataStudent) => (
+        <Space size="middle">
+          <Button
+            onClick={() =>
+              deleteClassMap(dataStudent.class_maps[0].class_map_id)
+            }
+            style={{ "margin-right": "5px" }}
+            type="primary"
+            danger
+          >
+            ลบ
+          </Button>
+        </Space>
+      ),
     },
   ];
 
@@ -114,48 +127,6 @@ const StudentInClass = () => {
         padding: "0 16px",
       }}
     >
-      <InfiniteScroll
-        dataLength={dataStudentInClass.length}
-        next={fetchClassMapByRoomId}
-        hasMore={dataStudentInClass.length < 0}
-        loader={
-          <Skeleton
-            avatar
-            paragraph={{
-              rows: 1,
-            }}
-            active
-          />
-        }
-        scrollableTarget="scrollableDiv"
-      >
-        <List
-          dataSource={dataStudentInClass}
-          renderItem={(item) => (
-            <List.Item key={item.fname}>
-              <List.Item.Meta
-                avatar={<Avatar src={img_user} />}
-                title={
-                  <a href="https://ant.design">
-                    {item.students.title} {item.students.fname}{" "}
-                    {item.students.lname}
-                  </a>
-                }
-                description={`เลขประจำตัว ${item.students.student_code}, ป.${item.students.grade_level}`}
-              />
-
-              <Button
-                onClick={() => deleteClassMap(item.class_map_id)}
-                style={{ "margin-right": "5px" }}
-                type="primary"
-                danger
-              >
-                ลบ
-              </Button>
-            </List.Item>
-          )}
-        />
-      </InfiniteScroll>
       <Table dataSource={dataSource} columns={columns} />
     </div>
   );
