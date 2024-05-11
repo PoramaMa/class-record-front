@@ -1,15 +1,4 @@
-import {
-  AutoComplete,
-  Button,
-  Cascader,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-} from "antd";
+import { Button, DatePicker, Form, Input, Select } from "antd";
 import React, { useState } from "react";
 const { Option } = Select;
 const residences = [
@@ -150,69 +139,29 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
-            required: true,
-            message: "Please input your E-mail!",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        label="Password"
+        name="title"
+        label="Title"
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Please select title!",
           },
         ]}
-        hasFeedback
       >
-        <Input.Password />
+        <Select placeholder="select your title">
+          <Option value="ด.ช.">ด.ช.</Option>
+          <Option value="ด.ญ.">ด.ญ.</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={["password"]}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: "Please confirm your password!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error("The new password that you entered do not match!")
-              );
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="nickname"
-        label="Nickname"
+        name="firstname"
+        label="First Name"
         tooltip="What do you want others to call you?"
         rules={[
           {
             required: true,
-            message: "Please input your nickname!",
+            message: "Please input your First Name!",
             whitespace: true,
           },
         ]}
@@ -221,85 +170,18 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
-        name="residence"
-        label="Habitual Residence"
-        rules={[
-          {
-            type: "array",
-            required: true,
-            message: "Please select your habitual residence!",
-          },
-        ]}
-      >
-        <Cascader options={residences} />
-      </Form.Item>
-
-      <Form.Item
-        name="phone"
-        label="Phone Number"
+        name="lickname"
+        label="Last Name"
+        tooltip="What do you want others to call you?"
         rules={[
           {
             required: true,
-            message: "Please input your phone number!",
+            message: "Please input your Last Name!",
+            whitespace: true,
           },
         ]}
       >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: "100%",
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="donation"
-        label="Donation"
-        rules={[
-          {
-            required: true,
-            message: "Please input donation amount!",
-          },
-        ]}
-      >
-        <InputNumber
-          addonAfter={suffixSelector}
-          style={{
-            width: "100%",
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="website"
-        label="Website"
-        rules={[
-          {
-            required: true,
-            message: "Please input website!",
-          },
-        ]}
-      >
-        <AutoComplete
-          options={websiteOptions}
-          onChange={onWebsiteChange}
-          placeholder="website"
-        >
-          <Input />
-        </AutoComplete>
-      </Form.Item>
-
-      <Form.Item
-        name="intro"
-        label="Intro"
-        rules={[
-          {
-            required: true,
-            message: "Please input Intro",
-          },
-        ]}
-      >
-        <Input.TextArea showCount maxLength={100} />
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -313,57 +195,44 @@ const FormStudent = () => {
         ]}
       >
         <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
+          <Option value="male">ชาย</Option>
+          <Option value="female">หญิง</Option>
+          <Option value="other">อื่นๆ</Option>
         </Select>
       </Form.Item>
 
       <Form.Item
-        label="Captcha"
-        extra="We must make sure that your are a human."
+        name="gradelevel"
+        label="Grade Level"
+        rules={[
+          {
+            required: true,
+            message: "Please select Grade Level!",
+          },
+        ]}
       >
-        <Row gutter={8}>
-          <Col span={12}>
-            <Form.Item
-              name="captcha"
-              noStyle
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the captcha you got!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Button>Get captcha</Button>
-          </Col>
-        </Row>
+        <Select placeholder="select your Grade Level">
+          <Option value="1">ป.1</Option>
+          <Option value="2">ป.2</Option>
+          <Option value="3">ป.3</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item
-        name="agreement"
-        valuePropName="checked"
+        name="birthdate"
+        label="Birth Date"
         rules={[
           {
-            validator: (_, value) =>
-              value
-                ? Promise.resolve()
-                : Promise.reject(new Error("Should accept agreement")),
+            required: true,
           },
         ]}
-        {...tailFormItemLayout}
       >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
+        <DatePicker />
       </Form.Item>
+
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Register
+          Submit
         </Button>
       </Form.Item>
     </Form>
