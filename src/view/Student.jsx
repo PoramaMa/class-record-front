@@ -12,13 +12,10 @@ const Student = () => {
 
   const location = useLocation();
 
-  let refData = "";
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const refParam = queryParams.get("ref");
     if (refParam) {
-      refData = refParam;
       setRef(refParam);
     }
   }, [location]);
@@ -56,10 +53,7 @@ const Student = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            {/* ใช้เงื่อนไขเพื่อตรวจสอบค่า refData แล้วแสดง FormStudent ตามเงื่อนไข */}
-            {refData == "all" && <FormStudent />}
-            {/* ใช้เงื่อนไขเพื่อตรวจสอบค่า refData แล้วแสดง ListStudent ตามเงื่อนไข */}
-            {refData == "add" && <ListStudent />}
+            {ref === "add" ? <FormStudent /> : <ListStudent />}
           </div>
         </Content>
         <Footer
