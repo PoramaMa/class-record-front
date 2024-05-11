@@ -104,7 +104,6 @@ const FormClassroom = () => {
           {
             required: true,
             message: "Please select Academic Year!",
-            whitespace: true,
           },
         ]}
       >
