@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -44,8 +44,8 @@ const FormClassroom = () => {
 
   const onClassroom = async (values) => {
     try {
-      await axios.post(`${url}/students`, values);
-      navigate("/students?ref=all");
+      await axios.post(`${url}/classrooms`, values);
+      navigate("/classrooms?ref=all");
     } catch (err) {
       alert(err.message);
       console.log("onClassroom err :: ", err);
@@ -99,7 +99,7 @@ const FormClassroom = () => {
       <Form.Item
         name="academic_year"
         label="Academic Year"
-        tooltip="What do you want others to call you?"
+        tooltip="พ.ศ."
         rules={[
           {
             required: true,
@@ -107,7 +107,16 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <DatePicker picker="year" />
+        <Select placeholder="select your Academic Year">
+          {[...Array(21)].map((_, index) => {
+            const year = 2550 + index;
+            return (
+              <Option key={year} value={year.toString()}>
+                {year}
+              </Option>
+            );
+          })}
+        </Select>
       </Form.Item>
 
       <Form.Item

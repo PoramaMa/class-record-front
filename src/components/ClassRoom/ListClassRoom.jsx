@@ -94,7 +94,7 @@ const ListClassroom = () => {
                 description={`ครูประจำชั้น : ${item.teacher_name}, ปีการศึกษา ${item.academic_year}`}
               />
               <Link
-                to={`/view-classroom/${btoa(
+                to={`/edit-classroom/${btoa(
                   item.classroom_id
                 )}?_=${uuidv4()}&ref=edit`}
               >
