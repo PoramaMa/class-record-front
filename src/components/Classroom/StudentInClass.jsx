@@ -1,8 +1,9 @@
-import { Button, Divider, List, Modal, Skeleton } from "antd";
+import { Avatar, Button, Divider, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
+import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
 
 const url = `${env.service_url}`;
@@ -12,7 +13,7 @@ const StudentInClass = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [dataClassroomAll, setClassroomAll] = useState([]);
+  const [dataStudentInClass, setStudentInClass] = useState([]);
 
   const fetchClassMapByRoomId = async (id) => {
     if (loading) {
@@ -21,8 +22,7 @@ const StudentInClass = () => {
     setLoading(true);
     try {
       const response = await axios.get(`${url}/class-maps/room/${atob(id)}`);
-      setClassroomAll(response.data);
-      console.log(response.data);
+      setStudentInClass(response.data);
     } catch (err) {
       console.log("fetchClassMapByRoomId err :: ", err);
     } finally {
@@ -64,13 +64,12 @@ const StudentInClass = () => {
         height: 400,
         overflow: "auto",
         padding: "0 16px",
-        border: "1px solid rgba(140, 140, 140, 0.35)",
       }}
     >
       <InfiniteScroll
-        dataLength={dataClassroomAll.length}
+        dataLength={dataStudentInClass.length}
         next={fetchClassMapByRoomId}
-        hasMore={dataClassroomAll.length < 0}
+        hasMore={dataStudentInClass.length < 0}
         loader={
           <Skeleton
             avatar
@@ -84,16 +83,18 @@ const StudentInClass = () => {
         scrollableTarget="scrollableDiv"
       >
         <List
-          dataSource={dataClassroomAll}
+          dataSource={dataStudentInClass}
           renderItem={(item) => (
             <List.Item key={item.fname}>
               <List.Item.Meta
+                avatar={<Avatar src={img_user} />}
                 title={
                   <a href="https://ant.design">
-                    {item.room_number} {item.room_name}
+                    {item.students.title} {item.students.fname}{" "}
+                    {item.students.lname}
                   </a>
                 }
-                description={`ครูประจำชั้น : ${item.teacher_name}, ปีการศึกษา ${item.academic_year}`}
+                description={`เลขประจำตัว ${item.students.student_code}, ป.${item.students.grade_level}`}
               />
 
               <Button
