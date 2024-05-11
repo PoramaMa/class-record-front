@@ -87,7 +87,7 @@ const ListClassroom = () => {
               <List.Item.Meta
                 title={
                   <a href="#">
-                    {item.room_number} {item.room_name}
+                    เลขห้อง : {item.room_number} {item.room_name}
                   </a>
                 }
                 description={`ครูประจำชั้น : ${item.teacher_name}, ป.${item.grade_level}, ปีการศึกษา ${item.academic_year}`}

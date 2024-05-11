@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, List, Modal, Skeleton } from "antd";
+import { Avatar, Button, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -79,7 +79,6 @@ const StudentInClass = () => {
             active
           />
         }
-        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List

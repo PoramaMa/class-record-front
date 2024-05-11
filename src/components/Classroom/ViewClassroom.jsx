@@ -12,12 +12,12 @@ const url = `${env.service_url}`;
 
 const tabListNoTitle = [
   {
-    key: "detail",
-    label: "Detail",
+    key: "student",
+    label: "รายชื่อนักเรียน",
   },
   {
-    key: "student",
-    label: "Student in Classroom",
+    key: "detail",
+    label: "รายละเอียด",
   },
 ];
 const contentListNoTitle = {
@@ -27,7 +27,7 @@ const contentListNoTitle = {
 const ViewClassroom = () => {
   const { id } = useParams();
 
-  const [activeTabKey2, setActiveTabKey2] = useState("detail");
+  const [activeTabKey2, setActiveTabKey2] = useState("student");
   const onTab2Change = (key) => {
     setActiveTabKey2(key);
   };
@@ -94,7 +94,7 @@ const ViewClassroom = () => {
         activeTabKey={activeTabKey2}
         tabBarExtraContent={
           <Button type="primary" onClick={showModal}>
-            Add Student
+            เพิ่มนักเรียน
           </Button>
         }
         onTabChange={onTab2Change}
@@ -104,7 +104,11 @@ const ViewClassroom = () => {
       >
         {contentListNoTitle[activeTabKey2]}
       </Card>
-      <Modal title="Student List" open={isModalOpen} onCancel={handleCancel}>
+      <Modal
+        title="รายชื่อนักเรียนทั้งหมด"
+        open={isModalOpen}
+        onCancel={handleCancel}
+      >
         <InfiniteScroll
           dataLength={dataStudentAll.length}
           next={fetchStudentAll}
@@ -138,7 +142,7 @@ const ViewClassroom = () => {
                   style={{ margin: "0 5px" }}
                   type="primary"
                 >
-                  Add
+                  เพิ่ม
                 </Button>
               </List.Item>
             )}

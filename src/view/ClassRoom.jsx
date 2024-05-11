@@ -48,7 +48,7 @@ const Classroom = () => {
             minHeight: "80vh",
           }}
         >
-          <h3>Classroom Management </h3>
+          <h3>จัดการห้องเรียน </h3>
           <div
             style={{
               padding: 24,
