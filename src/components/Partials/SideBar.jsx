@@ -36,7 +36,7 @@ const items = [
   },
   {
     key: "sub2",
-    label: "ClassRoom Management",
+    label: "Classroom Management",
     icon: <AppstoreOutlined />,
     children: [
       {

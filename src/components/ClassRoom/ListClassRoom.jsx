@@ -1,35 +1,34 @@
-import { Avatar, Button, Divider, List, Modal, Skeleton } from "antd";
+import { Button, Divider, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
 
 const url = `${env.service_url}`;
 
-const ListStudent = () => {
+const ListClassroom = () => {
   const [loading, setLoading] = useState(false);
 
-  const [dataStudentAll, setStudentAll] = useState([]);
+  const [dataClassroomAll, setClassroomAll] = useState([]);
 
-  const fetchStudentAll = async () => {
+  const fetchClassroomAll = async () => {
     if (loading) {
       return;
     }
     setLoading(true);
     try {
-      const response = await axios.get(`${url}/students`);
-      setStudentAll(response.data);
+      const response = await axios.get(`${url}/classrooms`);
+      setClassroomAll(response.data);
     } catch (err) {
-      console.log("fetchStudentAll err :: ", err);
+      console.log("fetchClassroomAll err :: ", err);
     } finally {
       setLoading(false);
     }
   };
 
-  const deleteStudent = async (id) => {
+  const deleteClassroom = async (id) => {
     try {
       const confirmResult = await new Promise((resolve) => {
         Modal.confirm({
@@ -37,8 +36,8 @@ const ListStudent = () => {
           content: "คุณแน่ใจหรือไม่ว่าต้องการลบนักเรียนคนนี้ ?",
           onOk: async () => {
             try {
-              await axios.delete(`${url}/students/${id}`);
-              await fetchStudentAll();
+              await axios.delete(`${url}/classrooms/${id}`);
+              await fetchClassroomAll();
             } catch (err) {
               console.log("err :: ", err);
             }
@@ -53,7 +52,7 @@ const ListStudent = () => {
   };
 
   useEffect(() => {
-    fetchStudentAll();
+    fetchClassroomAll();
   }, []);
 
   return (
@@ -67,9 +66,9 @@ const ListStudent = () => {
       }}
     >
       <InfiniteScroll
-        dataLength={dataStudentAll.length}
-        next={fetchStudentAll}
-        hasMore={dataStudentAll.length < 0}
+        dataLength={dataClassroomAll.length}
+        next={fetchClassroomAll}
+        hasMore={dataClassroomAll.length < 0}
         loader={
           <Skeleton
             avatar
@@ -83,27 +82,26 @@ const ListStudent = () => {
         scrollableTarget="scrollableDiv"
       >
         <List
-          dataSource={dataStudentAll}
+          dataSource={dataClassroomAll}
           renderItem={(item) => (
             <List.Item key={item.fname}>
               <List.Item.Meta
-                avatar={<Avatar src={img_user} />}
                 title={
                   <a href="https://ant.design">
-                    {item.title} {item.fname} {item.lname}
+                    {item.room_number} {item.room_name}
                   </a>
                 }
-                description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
+                description={`ครูประจำชั้น : ${item.teacher_name}, ปีการศึกษา ${item.academic_year}`}
               />
               <Link
-                to={`/view-student/${btoa(
-                  item.student_id
+                to={`/view-classroom/${btoa(
+                  item.classroom_id
                 )}?_=${uuidv4()}&ref=detail`}
               >
                 <Button type="primary">รายละเอียด</Button>
               </Link>
               <Button
-                onClick={() => deleteStudent(item.student_id)}
+                onClick={() => deleteClassroom(item.student_id)}
                 style={{ margin: "0 5px" }}
                 type="primary"
                 danger
@@ -117,4 +115,4 @@ const ListStudent = () => {
     </div>
   );
 };
-export default ListStudent;
+export default ListClassroom;
