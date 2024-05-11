@@ -1,4 +1,5 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
+
 import React from "react";
 import { env } from "../env";
 const { Option } = Select;
@@ -36,9 +37,18 @@ const tailFormItemLayout = {
   },
 };
 const FormStudent = () => {
+  const history = useHistory();
+
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+
+  const onStudent = async (values) => {
+    try {
+      await axios.post(`${url}/products`, values);
+      history.push("/students?ref=all");
+    } catch (err) {
+      alert(err.message);
+      console.log("onStudent err :: ", err);
+    }
   };
 
   return (
@@ -46,7 +56,7 @@ const FormStudent = () => {
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onFinish}
+      onFinish={onStudent}
       initialValues={{
         residence: ["zhejiang", "hangzhou", "xihu"],
         prefix: "86",
