@@ -23,6 +23,7 @@ const StudentInClass = () => {
     try {
       const response = await axios.get(`${url}/class-maps/room/${atob(id)}`);
       setStudentInClass(response.data);
+      console.log(response.data);
     } catch (err) {
       console.log("fetchClassMapByRoomId err :: ", err);
     } finally {
@@ -30,12 +31,12 @@ const StudentInClass = () => {
     }
   };
 
-  const deleteClassroom = async (id) => {
+  const deleteClassMap = async (id) => {
     try {
       const confirmResult = await new Promise((resolve) => {
         Modal.confirm({
           title: "ยืนยันการลบ",
-          content: "คุณแน่ใจหรือไม่ว่าต้องการลบ Classroom นี้ ?",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการลบนักเรียนออกจาก Classroom นี้ ?",
           onOk: async () => {
             try {
               await axios.delete(`${url}/class-maps/${id}`);
@@ -98,7 +99,7 @@ const StudentInClass = () => {
               />
 
               <Button
-                onClick={() => deleteClassroom(item.classroom_id)}
+                onClick={() => deleteClassMap(item.class_map_id)}
                 style={{ "margin-right": "5px" }}
                 type="primary"
                 danger
