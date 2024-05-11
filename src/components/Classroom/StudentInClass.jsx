@@ -15,7 +15,7 @@ const StudentInClass = () => {
 
   const [dataStudentInClass, setStudentInClass] = useState([]);
 
-  const fetchClassMapByRoomId = async (id) => {
+  const fetchClassMapByRoomId = async () => {
     if (loading) {
       return;
     }
@@ -23,7 +23,6 @@ const StudentInClass = () => {
     try {
       const response = await axios.get(`${url}/class-maps/room/${atob(id)}`);
       setStudentInClass(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log("fetchClassMapByRoomId err :: ", err);
     } finally {
@@ -55,7 +54,7 @@ const StudentInClass = () => {
   };
 
   useEffect(() => {
-    fetchClassMapByRoomId(id);
+    fetchClassMapByRoomId();
   }, []);
 
   return (
