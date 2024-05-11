@@ -57,7 +57,7 @@ const FormStudent = () => {
       scrollToFirstError
     >
       <Form.Item
-        name="studentCode"
+        name="student_code"
         label="Student Code"
         tooltip="SCXXXX"
         rules={[
@@ -88,7 +88,7 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
-        name="firstname"
+        name="fname"
         label="First Name"
         tooltip="What do you want others to call you?"
         rules={[
@@ -103,7 +103,7 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
-        name="lickname"
+        name="lname"
         label="Last Name"
         tooltip="What do you want others to call you?"
         rules={[
@@ -128,14 +128,14 @@ const FormStudent = () => {
         ]}
       >
         <Select placeholder="select your gender">
-          <Option value="male">ชาย</Option>
-          <Option value="female">หญิง</Option>
-          <Option value="other">อื่นๆ</Option>
+          <Option value="ชาย">ชาย</Option>
+          <Option value="หญิง">หญิง</Option>
+          <Option value="อื่นๆ">อื่นๆ</Option>
         </Select>
       </Form.Item>
 
       <Form.Item
-        name="gradelevel"
+        name="grade_level"
         label="Grade Level"
         rules={[
           {
