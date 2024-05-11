@@ -1,20 +1,36 @@
-import { AppstoreOutlined, TeamOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  HomeOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
+
 const { Sider } = Layout;
+const { SubMenu } = Menu;
+
 const items = [
+  {
+    key: "1",
+    icon: <HomeOutlined />,
+    label: "Home",
+    path: "/",
+  },
   {
     key: "sub1",
     label: "Student Management",
     icon: <TeamOutlined />,
     children: [
       {
-        key: "1",
+        key: "2",
         label: "List all",
+        path: "/students",
       },
       {
-        key: "2",
+        key: "3",
         label: "Add student",
+        path: "/add-student",
       },
     ],
   },
@@ -24,16 +40,19 @@ const items = [
     icon: <AppstoreOutlined />,
     children: [
       {
-        key: "3",
+        key: "4",
         label: "List all",
+        path: "/classrooms",
       },
       {
-        key: "4",
+        key: "5",
         label: "Add classroom",
+        path: "/add-classroom",
       },
     ],
   },
 ];
+
 const SideBar = () => {
   return (
     <>
@@ -57,12 +76,23 @@ const SideBar = () => {
             margin: "10px auto",
           }}
         />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={items}
-        />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          {items.map((item) =>
+            item.children ? (
+              <SubMenu key={item.key} icon={item.icon} title={item.label}>
+                {item.children.map((child) => (
+                  <Menu.Item key={child.key}>
+                    <Link to={child.path}>{child.label}</Link>
+                  </Menu.Item>
+                ))}
+              </SubMenu>
+            ) : (
+              <Menu.Item key={item.key} icon={item.icon}>
+                <Link to={item.path}>{item.label}</Link>
+              </Menu.Item>
+            )
+          )}
+        </Menu>
       </Sider>
     </>
   );
