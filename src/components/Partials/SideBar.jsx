@@ -14,39 +14,39 @@ const items = [
   {
     key: "1",
     icon: <HomeOutlined />,
-    label: "Home",
+    label: "หน้าหลัก",
     path: "/",
   },
   {
     key: "sub1",
-    label: "Student Management",
+    label: "จัดการนักเรียน",
     icon: <TeamOutlined />,
     children: [
       {
         key: "2",
-        label: "List all",
+        label: "นักเรียนทั้งหมด",
         path: "/students?ref=all",
       },
       {
         key: "3",
-        label: "Add student",
+        label: "เพิ่มนักเรียน",
         path: "/add-student?ref=add",
       },
     ],
   },
   {
     key: "sub2",
-    label: "Classroom Management",
+    label: "จัดการห้องเรียน",
     icon: <AppstoreOutlined />,
     children: [
       {
         key: "4",
-        label: "List all",
+        label: "ห้องเรียนทั้งหมด",
         path: "/classrooms?ref=all",
       },
       {
         key: "5",
-        label: "Add classroom",
+        label: "เพิ่มห้องเรียน",
         path: "/add-classroom?ref=add",
       },
     ],
