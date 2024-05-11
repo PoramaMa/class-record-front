@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import SideBar from "../components/Partials/SideBar";
+import EditStudent from "../components/Student/EditStudent";
 import FormStudent from "../components/Student/FormStudent";
 import ListStudent from "../components/Student/ListStudent";
-import ViewStudent from "../components/Student/ViewStudent";
 const { Header, Content, Footer } = Layout;
 
 const Student = () => {
@@ -56,7 +56,7 @@ const Student = () => {
           >
             {ref === "all" && <ListStudent />}
             {ref === "add" && <FormStudent />}
-            {ref === "detail" && <ViewStudent />}
+            {ref === "edit" && <EditStudent />}
           </div>
         </Content>
         <Footer

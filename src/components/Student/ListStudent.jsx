@@ -96,11 +96,11 @@ const ListStudent = () => {
                 description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
               <Link
-                to={`/view-student/${btoa(
+                to={`/edit-student/${btoa(
                   item.student_id
-                )}?_=${uuidv4()}&ref=detail`}
+                )}?_=${uuidv4()}&ref=edit`}
               >
-                <Button type="primary">รายละเอียด</Button>
+                <Button type="primary">แก้ไข</Button>
               </Link>
               <Button
                 onClick={() => deleteStudent(item.student_id)}

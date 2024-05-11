@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import SideBar from "../components/Partials/SideBar";
 import FormStudent from "../components/Student/FormStudent";
 import ListClassroom from "../components/Classroom/ListClassroom";
-import ViewStudent from "../components/Student/ViewStudent";
+import EditClassroom from "../components/Classroom/EditClassroom";
 const { Header, Content, Footer } = Layout;
 
 const Classroom = () => {
@@ -56,7 +56,7 @@ const Classroom = () => {
           >
             {ref === "all" && <ListClassroom />}
             {ref === "add" && <FormStudent />}
-            {ref === "detail" && <ViewStudent />}
+            {ref === "edit" && <EditClassroom />}
           </div>
         </Content>
         <Footer
