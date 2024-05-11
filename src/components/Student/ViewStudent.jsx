@@ -23,7 +23,45 @@ const ViewClassroom = () => {
 
   useEffect(() => {
     fetchStudentById(id);
-  }, [id]);
+  }, []);
+
+  const formatDateThai = (isoDateString) => {
+    const date = new Date(isoDateString);
+    const thaiMonth = [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
+    ];
+    const thaiDate = `${date.getDate()} ${thaiMonth[date.getMonth()]} ${
+      date.getFullYear() + 543
+    }`;
+    return thaiDate;
+  };
+
+  const calculateAge = (birthDateString) => {
+    const birthDate = new Date(birthDateString);
+    const currentDate = new Date();
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const birthMonth = birthDate.getMonth();
+    const currentMonth = currentDate.getMonth();
+    if (
+      currentMonth < birthMonth ||
+      (currentMonth === birthMonth &&
+        currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
 
   return (
     <Space
@@ -33,7 +71,7 @@ const ViewClassroom = () => {
         width: "100%",
       }}
     >
-      <Card title="ข้อมูลนักเรียน" extra={<a href="#">More</a>}>
+      <Card title="ข้อมูล" extra={<a href="#">More</a>}>
         <h3>ข้อมูลส่วนตัว</h3>
         <p>
           <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}
@@ -43,6 +81,22 @@ const ViewClassroom = () => {
           {" "}
           <b>เพศ : </b>
           {dataStudent.gender}
+        </p>
+        <p>
+          <b>วัน-เดือน-ปีเกิด : </b>
+          {formatDateThai(dataStudent.birthdate)}
+        </p>
+        <p>
+          <b>อายุ : </b>
+          {calculateAge(dataStudent.birthdate)}
+        </p>
+        <h3>ข้อมูลนักเรียน</h3>
+        <p>
+          <b>เลขประจำตัว : </b> {dataStudent.student_code}
+        </p>
+        <p>
+          <b>ระดับชั้นประถมศึกษาปีที่ : {dataStudent.grade_level} </b>
+          {}
         </p>
       </Card>
     </Space>
