@@ -1,9 +1,9 @@
-import { Avatar, Divider, List, Skeleton } from "antd";
+import { Avatar, Button, Divider, List, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import img_user from "../assets/images/user.png";
-import { env } from "../env";
+import img_user from "../../assets/images/user.png";
+import { env } from "../../env";
 
 const url = `${env.service_url}`;
 
@@ -69,7 +69,9 @@ const ListStudent = () => {
                 }
                 description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
-              <div>Content</div>
+              <div>
+                <Button type="primary">รายละเอียด</Button>
+              </div>
             </List.Item>
           )}
         />

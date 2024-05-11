@@ -2,9 +2,9 @@ import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import FormStudent from "../components/FormStudent";
-import ListStudent from "../components/ListStudent";
 import SideBar from "../components/Partials/SideBar";
+import FormStudent from "../components/Student/FormStudent";
+import ListStudent from "../components/Student/ListStudent";
 const { Header, Content, Footer } = Layout;
 
 const Student = () => {

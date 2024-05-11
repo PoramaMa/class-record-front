@@ -1,7 +1,8 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
-
+import axios from "axios";
 import React from "react";
-import { env } from "../env";
+import { useNavigate } from "react-router-dom";
+import { env } from "../../env";
 const { Option } = Select;
 
 const url = `${env.service_url}`;
@@ -37,14 +38,14 @@ const tailFormItemLayout = {
   },
 };
 const FormStudent = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [form] = Form.useForm();
 
   const onStudent = async (values) => {
     try {
-      await axios.post(`${url}/products`, values);
-      history.push("/students?ref=all");
+      await axios.post(`${url}/students`, values);
+      navigate("/students?ref=all");
     } catch (err) {
       alert(err.message);
       console.log("onStudent err :: ", err);
@@ -69,7 +70,7 @@ const FormStudent = () => {
       <Form.Item
         name="student_code"
         label="Student Code"
-        tooltip="SCXXXX"
+        tooltip="123456"
         rules={[
           {
             required: true,
