@@ -27,6 +27,7 @@ const ViewClassroom = () => {
         style={{
           width: "100%",
         }}
+        title={""}
         tabList={tabListNoTitle}
         activeTabKey={activeTabKey2}
         tabBarExtraContent={<a href="#">Add Student</a>}
