@@ -8,7 +8,7 @@ import ListStudent from "../components/Student/ListStudent";
 import ViewStudent from "../components/Student/ViewStudent";
 const { Header, Content, Footer } = Layout;
 
-const ClassRoom = () => {
+const Classroom = () => {
   const [ref, setRef] = useState("");
 
   const location = useLocation();
@@ -46,7 +46,7 @@ const ClassRoom = () => {
             minHeight: "80vh",
           }}
         >
-          <h3>Student Management </h3>
+          <h3>Classroom Management </h3>
           <div
             style={{
               padding: 24,
@@ -70,4 +70,4 @@ const ClassRoom = () => {
     </Layout>
   );
 };
-export default ClassRoom;
+export default Classroom;

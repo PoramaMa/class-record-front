@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./view/App.jsx";
-import ClassRoom from "./view/ClassRoom.jsx";
+import ClassRoom from "./view/Classroom.jsx";
 import Student from "./view/Student.jsx";
 
 const router = createBrowserRouter([
