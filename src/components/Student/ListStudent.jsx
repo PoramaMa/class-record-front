@@ -71,7 +71,11 @@ const ListStudent = () => {
                 }
                 description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
-              <Link to={`/view-student/${btoa(item.student_id)}?_=${uuidv4()}`}>
+              <Link
+                to={`/view-student/${btoa(
+                  item.student_id
+                )}?_=${uuidv4()}&ref=detail`}
+              >
                 <Button type="primary">รายละเอียด</Button>
               </Link>
             </List.Item>

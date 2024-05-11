@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { env } from "../../env";
 const { Option } = Select;
@@ -37,14 +37,14 @@ const tailFormItemLayout = {
     },
   },
 };
-const FormStudent = () => {
+const ViewStudent = () => {
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
 
-  const onStudent = async (values) => {
+  const onEditStudent = async (values) => {
     try {
-      await axios.post(`${url}/students`, values);
+      await axios.patch(`${url}/students/`, values);
       navigate("/students?ref=all");
     } catch (err) {
       alert(err.message);
@@ -52,12 +52,18 @@ const FormStudent = () => {
     }
   };
 
+  const [isEdit, setIsEdit] = useState(false);
+
+  const onEdit = async () => {
+    setIsEdit(true);
+  };
+
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onStudent}
+      onFinish={onEditStudent}
       initialValues={{
         residence: ["zhejiang", "hangzhou", "xihu"],
         prefix: "86",
@@ -79,7 +85,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Input />
+        <Input disabled={!isEdit} />
       </Form.Item>
 
       <Form.Item
@@ -92,7 +98,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your title">
+        <Select placeholder="select your title" disabled={!isEdit}>
           <Option value="ด.ช.">ด.ช.</Option>
           <Option value="ด.ญ.">ด.ญ.</Option>
         </Select>
@@ -110,7 +116,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Input />
+        <Input disabled={!isEdit} />
       </Form.Item>
 
       <Form.Item
@@ -125,7 +131,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Input />
+        <Input disabled={!isEdit} />
       </Form.Item>
 
       <Form.Item
@@ -138,7 +144,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your gender">
+        <Select placeholder="select your gender" disabled={!isEdit}>
           <Option value="ชาย">ชาย</Option>
           <Option value="หญิง">หญิง</Option>
           <Option value="อื่นๆ">อื่นๆ</Option>
@@ -155,7 +161,7 @@ const FormStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your Grade Level">
+        <Select placeholder="select your Grade Level" disabled={!isEdit}>
           <Option value="1">ป.1</Option>
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
@@ -171,15 +177,21 @@ const FormStudent = () => {
           },
         ]}
       >
-        <DatePicker />
+        <DatePicker disabled={!isEdit} />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        {isEdit ? (
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        ) : (
+          <Button danger onClick={onEdit}>
+            Edit
+          </Button>
+        )}
       </Form.Item>
     </Form>
   );
 };
-export default FormStudent;
+export default ViewStudent;

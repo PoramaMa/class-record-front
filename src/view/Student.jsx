@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import SideBar from "../components/Partials/SideBar";
 import FormStudent from "../components/Student/FormStudent";
 import ListStudent from "../components/Student/ListStudent";
+import ViewStudent from "../components/Student/ViewStudent";
 const { Header, Content, Footer } = Layout;
 
 const Student = () => {
@@ -53,7 +54,9 @@ const Student = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            {ref === "add" ? <FormStudent /> : <ListStudent />}
+            {ref === "all" && <ListStudent />}
+            {ref === "add" && <FormStudent />}
+            {ref === "detail" && <ViewStudent />}
           </div>
         </Content>
         <Footer
