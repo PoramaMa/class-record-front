@@ -23,6 +23,10 @@ const router = createBrowserRouter([
     element: <Student />,
   },
   {
+    path: "/view-student/:id",
+    element: <Student />,
+  },
+  {
     path: "/classrooms",
     element: <ClassRoom />,
   },

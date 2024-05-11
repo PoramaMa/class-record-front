@@ -1,4 +1,4 @@
-import { Button, Divider, List, Modal, Skeleton } from "antd";
+import { Button, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -78,7 +78,6 @@ const ListClassroom = () => {
             active
           />
         }
-        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List
@@ -87,7 +86,7 @@ const ListClassroom = () => {
             <List.Item key={item.fname}>
               <List.Item.Meta
                 title={
-                  <a href="https://ant.design">
+                  <a href="#">
                     {item.room_number} {item.room_name}
                   </a>
                 }

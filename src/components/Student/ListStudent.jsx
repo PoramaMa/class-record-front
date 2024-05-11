@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, List, Modal, Skeleton } from "antd";
+import { Avatar, Button, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -79,7 +79,6 @@ const ListStudent = () => {
             active
           />
         }
-        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
       >
         <List
@@ -89,18 +88,27 @@ const ListStudent = () => {
               <List.Item.Meta
                 avatar={<Avatar src={img_user} />}
                 title={
-                  <a href="https://ant.design">
+                  <a href="#">
                     {item.title} {item.fname} {item.lname}
                   </a>
                 }
                 description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
               <Link
+                to={`/view-student/${btoa(
+                  item.classroom_id
+                )}?_=${uuidv4()}&ref=detail`}
+              >
+                <Button type="primary" style={{ "margin-right": "5px" }}>
+                  รายละเอียด
+                </Button>
+              </Link>
+              <Link
                 to={`/edit-student/${btoa(
                   item.student_id
                 )}?_=${uuidv4()}&ref=edit`}
               >
-                <Button type="primary">แก้ไข</Button>
+                <Button style={{ "margin-right": "5px" }}>แก้ไข</Button>
               </Link>
               <Button
                 onClick={() => deleteStudent(item.student_id)}
