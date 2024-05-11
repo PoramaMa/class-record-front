@@ -1,4 +1,4 @@
-import { Card, Space } from "antd";
+import { Card, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ const ViewClassroom = () => {
   const fetchStudentById = async (id) => {
     try {
       const response = await axios.get(`${url}/students/${atob(id)}`);
+      console.log(response.data);
       setStudent(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
@@ -62,6 +63,65 @@ const ViewClassroom = () => {
     return age;
   };
 
+  const columns = [
+    {
+      title: "เลขห้อง",
+      dataIndex: "classrooms.room_number",
+      key: "classrooms.room_number",
+    },
+    {
+      title: "Age",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
+    {
+      title: "Address",
+      dataIndex: "student_id",
+      key: "student_id",
+    },
+  ];
+
+  const dataSource = [
+    {
+      class_map_id: 7,
+      student_id: 1,
+      classroom_id: 1,
+      isActive: true,
+      createdAt: "2024-05-11T19:41:40.000Z",
+      updatedAt: "2024-05-11T19:41:40.000Z",
+      classrooms: {
+        classroom_id: 1,
+        room_number: "221",
+        room_name: "ห้องดนตรี",
+        grade_level: "1",
+        academic_year: 2567,
+        teacher_name: "ครูสมชาย",
+        isActive: true,
+        createdAt: "2024-05-11T18:14:54.000Z",
+        updatedAt: "2024-05-11T18:14:54.000Z",
+      },
+    },
+    {
+      class_map_id: 9,
+      student_id: 1,
+      classroom_id: 2,
+      isActive: true,
+      createdAt: "2024-05-11T19:42:03.000Z",
+      updatedAt: "2024-05-11T19:42:03.000Z",
+      classrooms: {
+        classroom_id: 2,
+        room_number: "222",
+        room_name: "ห้องคอมพิวเตอร์",
+        grade_level: "1",
+        academic_year: 2567,
+        teacher_name: "ครูสมหญิง",
+        isActive: true,
+        createdAt: "2024-05-11T18:20:25.000Z",
+        updatedAt: "2024-05-11T18:20:25.000Z",
+      },
+    },
+  ];
+
   return (
     <Space
       direction="vertical"
@@ -99,6 +159,7 @@ const ViewClassroom = () => {
         </p>
         <hr />
         <h3>ข้อมูลห้องเรียน</h3>
+        <Table dataSource={dataSource} columns={columns} />
       </Card>
     </Space>
   );
