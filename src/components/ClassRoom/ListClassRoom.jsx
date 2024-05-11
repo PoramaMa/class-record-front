@@ -96,9 +96,9 @@ const ListClassroom = () => {
               <Link
                 to={`/view-classroom/${btoa(
                   item.classroom_id
-                )}?_=${uuidv4()}&ref=detail`}
+                )}?_=${uuidv4()}&ref=edit`}
               >
-                <Button type="primary">รายละเอียด</Button>
+                <Button type="primary">แก้ไข</Button>
               </Link>
               <Button
                 onClick={() => deleteClassroom(item.student_id)}

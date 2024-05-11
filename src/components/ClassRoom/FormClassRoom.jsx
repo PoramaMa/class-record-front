@@ -37,18 +37,18 @@ const tailFormItemLayout = {
     },
   },
 };
-const FormStudent = () => {
+const FormClassroom = () => {
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
 
-  const onStudent = async (values) => {
+  const onClassroom = async (values) => {
     try {
       await axios.post(`${url}/students`, values);
       navigate("/students?ref=all");
     } catch (err) {
       alert(err.message);
-      console.log("onStudent err :: ", err);
+      console.log("onClassroom err :: ", err);
     }
   };
 
@@ -57,7 +57,7 @@ const FormStudent = () => {
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onStudent}
+      onFinish={onClassroom}
       initialValues={{
         residence: ["zhejiang", "hangzhou", "xihu"],
         prefix: "86",
@@ -68,13 +68,13 @@ const FormStudent = () => {
       scrollToFirstError
     >
       <Form.Item
-        name="student_code"
-        label="Student Code"
+        name="room_number"
+        label="Room Number"
         tooltip="123456"
         rules={[
           {
             required: true,
-            message: "Please input your student code!",
+            message: "Please input your Room Number!",
             whitespace: true,
           },
         ]}
@@ -83,95 +83,46 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
-        name="title"
-        label="Title"
+        name="room_name"
+        label="Room Name"
         rules={[
           {
             required: true,
-            message: "Please select title!",
+            message: "Please input your Room Name!",
+            whitespace: true,
           },
         ]}
       >
-        <Select placeholder="select your title">
-          <Option value="ด.ช.">ด.ช.</Option>
-          <Option value="ด.ญ.">ด.ญ.</Option>
-        </Select>
+        <Input />
       </Form.Item>
 
       <Form.Item
-        name="fname"
-        label="First Name"
+        name="academic_year"
+        label="Academic Year"
         tooltip="What do you want others to call you?"
         rules={[
           {
             required: true,
-            message: "Please input your First Name!",
+            message: "Please select Academic Year!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <DatePicker picker="year" />
+      </Form.Item>
+
+      <Form.Item
+        name="teacher_name"
+        label="Teacher Name"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Teacher Name!",
             whitespace: true,
           },
         ]}
       >
         <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="lname"
-        label="Last Name"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Last Name!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: "Please select gender!",
-          },
-        ]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="ชาย">ชาย</Option>
-          <Option value="หญิง">หญิง</Option>
-          <Option value="อื่นๆ">อื่นๆ</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item
-        name="grade_level"
-        label="Grade Level"
-        rules={[
-          {
-            required: true,
-            message: "Please select Grade Level!",
-          },
-        ]}
-      >
-        <Select placeholder="select your Grade Level">
-          <Option value="1">ป.1</Option>
-          <Option value="2">ป.2</Option>
-          <Option value="3">ป.3</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item
-        name="birthdate"
-        label="Birth Date"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <DatePicker />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
@@ -182,4 +133,4 @@ const FormStudent = () => {
     </Form>
   );
 };
-export default FormStudent;
+export default FormClassroom;

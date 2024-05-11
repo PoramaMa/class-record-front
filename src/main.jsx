@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <ClassRoom />,
   },
   {
-    path: "/view-classroom/:id",
+    path: "/edit-classroom/:id",
     element: <ClassRoom />,
   },
 ]);
