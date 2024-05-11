@@ -1,6 +1,6 @@
 import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import EditClassroom from "../components/Classroom/EditClassroom";
 import FormClassroom from "../components/Classroom/FormClassroom";
@@ -12,6 +12,12 @@ const { Header, Content, Footer } = Layout;
 
 const Classroom = () => {
   const [ref, setRef] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const location = useLocation();
 
@@ -48,7 +54,16 @@ const Classroom = () => {
             minHeight: "80vh",
           }}
         >
-          <h3>จัดการห้องเรียน </h3>
+          <div style={{ justifyContent: "space-between", display: "flex" }}>
+            <h3>จัดการห้องเรียน </h3>
+            <a
+              onClick={handleGoBack}
+              style={{ margin: "auto 5px" }}
+              type="primary"
+            >
+              ย้อนกลับ
+            </a>
+          </div>
           <div
             style={{
               padding: 24,

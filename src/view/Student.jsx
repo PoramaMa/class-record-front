@@ -1,6 +1,6 @@
 import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import SideBar from "../components/Partials/SideBar";
 import EditStudent from "../components/Student/EditStudent";
@@ -12,6 +12,12 @@ const { Header, Content, Footer } = Layout;
 
 const Student = () => {
   const [ref, setRef] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const location = useLocation();
 
@@ -48,7 +54,17 @@ const Student = () => {
             minHeight: "80vh",
           }}
         >
-          <h3>Student Management </h3>
+          <div style={{ justifyContent: "space-between", display: "flex" }}>
+            <h3>จัดการนักเรียน </h3>
+            <a
+              onClick={handleGoBack}
+              style={{ margin: "auto 5px" }}
+              type="primary"
+            >
+              ย้อนกลับ
+            </a>
+          </div>
+
           <div
             style={{
               padding: 24,

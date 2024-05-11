@@ -26,7 +26,6 @@ const ViewClassroom = () => {
       const response = await axios.get(
         `${url}/classrooms/students/${atob(id)}`
       );
-      console.log("dataClassroom :: ", response.data);
       setClassroom(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
@@ -88,9 +87,19 @@ const ViewClassroom = () => {
       key: "room_name",
     },
     {
+      title: "ระดับชั้น",
+      dataIndex: "grade_level",
+      key: "grade_level",
+    },
+    {
       title: "ครูประจำชั้น",
       dataIndex: "teacher_name",
       key: "teacher_name",
+    },
+    {
+      title: "ปีการศึกษา",
+      dataIndex: "academic_year",
+      key: "academic_year",
     },
   ];
 
@@ -104,7 +113,7 @@ const ViewClassroom = () => {
         width: "100%",
       }}
     >
-      <Card title="ข้อมูล" extra={<a href="#">More</a>}>
+      <Card title="ข้อมูล" extra={<a href="#"></a>}>
         <h3>ข้อมูลส่วนตัว</h3>
         <p>
           <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}
