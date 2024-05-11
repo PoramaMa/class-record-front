@@ -2,6 +2,7 @@ import { Avatar, Button, Card, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useParams } from "react-router-dom";
 import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
 import EditClassroom from "./EditClassroom";
@@ -24,6 +25,9 @@ const contentListNoTitle = {
   student: <StudentInClass />,
 };
 const ViewClassroom = () => {
+  const { id } = useParams();
+  const classroom_id = atob(id);
+
   const [activeTabKey2, setActiveTabKey2] = useState("detail");
   const onTab2Change = (key) => {
     setActiveTabKey2(key);
@@ -48,6 +52,31 @@ const ViewClassroom = () => {
       setStudentAll(response.data);
     } catch (err) {
       console.log("fetchStudentAll err :: ", err);
+    }
+  };
+
+  const addClassMap = async (id) => {
+    try {
+      await new Promise((resolve) => {
+        Modal.confirm({
+          title: "ยืนยันการลบ",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการเพิ่มนักเรียนเข้า Classroom นี้ ?",
+          onOk: async () => {
+            try {
+              await axios.post(`${url}/class-maps`, {
+                student_id: id,
+                classroom_id: classroom_id,
+              });
+            } catch (err) {
+              console.log("addClassMap.post err :: ", err);
+            }
+            resolve(true);
+          },
+          onCancel: () => resolve(false),
+        });
+      });
+    } catch (err) {
+      console.log("addClassMap err :: ", err);
     }
   };
 
@@ -106,7 +135,7 @@ const ViewClassroom = () => {
                   description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
                 />
                 <Button
-                  onClick={() => deleteStudent(item.student_id)}
+                  onClick={() => addClassMap(item.student_id)}
                   style={{ margin: "0 5px" }}
                   type="primary"
                 >
