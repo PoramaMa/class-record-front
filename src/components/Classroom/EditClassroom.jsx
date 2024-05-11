@@ -50,11 +50,17 @@ const EditClassroom = () => {
     try {
       const response = await axios.get(`${url}/classrooms/${atob(id)}`);
       setClassroomById(response.data);
-      const { room_number, room_name, academic_year, teacher_name } =
-        response.data;
+      const {
+        room_number,
+        room_name,
+        grade_level,
+        academic_year,
+        teacher_name,
+      } = response.data;
       form.setFieldsValue({
         room_number,
         room_name,
+        grade_level,
         academic_year,
         teacher_name,
       });
@@ -125,6 +131,23 @@ const EditClassroom = () => {
         ]}
       >
         <Input disabled={!isEdit} />
+      </Form.Item>
+
+      <Form.Item
+        name="grade_level"
+        label="Grade Level"
+        rules={[
+          {
+            required: true,
+            message: "Please select Grade Level!",
+          },
+        ]}
+      >
+        <Select placeholder="select your Grade Level" disabled={!isEdit}>
+          <Option value="1">ป.1</Option>
+          <Option value="2">ป.2</Option>
+          <Option value="3">ป.3</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item

@@ -90,7 +90,7 @@ const ListClassroom = () => {
                     {item.room_number} {item.room_name}
                   </a>
                 }
-                description={`ครูประจำชั้น : ${item.teacher_name}, ปีการศึกษา ${item.academic_year}`}
+                description={`ครูประจำชั้น : ${item.teacher_name}, ป.${item.grade_level}, ปีการศึกษา ${item.academic_year}`}
               />
               <Link
                 to={`/view-classroom/${btoa(

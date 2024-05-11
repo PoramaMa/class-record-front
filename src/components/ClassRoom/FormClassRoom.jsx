@@ -97,6 +97,23 @@ const FormClassroom = () => {
       </Form.Item>
 
       <Form.Item
+        name="grade_level"
+        label="Grade Level"
+        rules={[
+          {
+            required: true,
+            message: "Please select Grade Level!",
+          },
+        ]}
+      >
+        <Select placeholder="select your Grade Level">
+          <Option value="1">ป.1</Option>
+          <Option value="2">ป.2</Option>
+          <Option value="3">ป.3</Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item
         name="academic_year"
         label="Academic Year"
         tooltip="พ.ศ."

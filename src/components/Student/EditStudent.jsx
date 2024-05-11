@@ -197,9 +197,9 @@ const ViewStudent = () => {
         ]}
       >
         <Select placeholder="select your Grade Level" disabled={!isEdit}>
-          <Option value="ป.1">ป.1</Option>
-          <Option value="ป.2">ป.2</Option>
-          <Option value="ป.3">ป.3</Option>
+          <Option value="1">ป.1</Option>
+          <Option value="2">ป.2</Option>
+          <Option value="3">ป.3</Option>
         </Select>
       </Form.Item>
 

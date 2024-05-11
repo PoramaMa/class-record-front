@@ -92,7 +92,7 @@ const ListStudent = () => {
                     {item.title} {item.fname} {item.lname}
                   </a>
                 }
-                description={`เลขประจำตัว ${item.student_code}, ${item.grade_level}`}
+                description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
               <Link
                 to={`/view-student/${btoa(
