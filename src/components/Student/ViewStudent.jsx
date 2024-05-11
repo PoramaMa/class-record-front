@@ -1,7 +1,7 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { env } from "../../env";
 const { Option } = Select;
 
@@ -39,8 +39,21 @@ const tailFormItemLayout = {
 };
 const ViewStudent = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [form] = Form.useForm();
+
+  const [dataStudentById, setStudentById] = useState([]);
+
+  const fetchStudentById = async (id) => {
+    try {
+      const response = await axios.get(`${url}/students/${id}`);
+      setStudentById(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log("fetchStudentById err :: ", err);
+    }
+  };
 
   const onEditStudent = async (values) => {
     try {
@@ -57,6 +70,10 @@ const ViewStudent = () => {
   const onEdit = async () => {
     setIsEdit(true);
   };
+
+  useEffect(() => {
+    fetchStudentById(id);
+  }, []);
 
   return (
     <Form
