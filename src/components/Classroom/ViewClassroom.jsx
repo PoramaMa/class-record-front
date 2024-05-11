@@ -26,7 +26,6 @@ const contentListNoTitle = {
 };
 const ViewClassroom = () => {
   const { id } = useParams();
-  const classroom_id = atob(id);
 
   const [activeTabKey2, setActiveTabKey2] = useState("detail");
   const onTab2Change = (key) => {
@@ -55,7 +54,7 @@ const ViewClassroom = () => {
     }
   };
 
-  const addClassMap = async (id) => {
+  const addClassMap = async (student_id) => {
     try {
       await new Promise((resolve) => {
         Modal.confirm({
@@ -64,8 +63,8 @@ const ViewClassroom = () => {
           onOk: async () => {
             try {
               await axios.post(`${url}/class-maps`, {
-                student_id: id,
-                classroom_id: classroom_id,
+                student_id: student_id,
+                classroom_id: atob(id),
               });
             } catch (err) {
               console.log("addClassMap.post err :: ", err);
