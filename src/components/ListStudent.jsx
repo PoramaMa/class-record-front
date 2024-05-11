@@ -2,6 +2,7 @@ import { Avatar, Divider, List, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import img_user from "../assets/images/user.png";
 import { env } from "../env";
 
 const url = `${env.service_url}`;
@@ -60,13 +61,13 @@ const ListStudent = () => {
           renderItem={(item) => (
             <List.Item key={item.fname}>
               <List.Item.Meta
-                avatar={<Avatar src={item.fname} />}
+                avatar={<Avatar src={img_user} />}
                 title={
                   <a href="https://ant.design">
                     {item.title} {item.fname} {item.lname}
                   </a>
                 }
-                description={"เลขประจำตัว " + item.student_code}
+                description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
               />
               <div>Content</div>
             </List.Item>
