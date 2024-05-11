@@ -6,6 +6,8 @@ import SideBar from "../components/Partials/SideBar";
 import FormClassroom from "../components/Classroom/FormClassroom";
 import ListClassroom from "../components/Classroom/ListClassroom";
 import EditClassroom from "../components/Classroom/EditClassroom";
+import ViewClassroom from "../components/Classroom/ViewClassroom";
+
 const { Header, Content, Footer } = Layout;
 
 const Classroom = () => {
@@ -57,6 +59,7 @@ const Classroom = () => {
             {ref === "all" && <ListClassroom />}
             {ref === "add" && <FormClassroom />}
             {ref === "edit" && <EditClassroom />}
+            {ref === "detail" && <ViewClassroom />}
           </div>
         </Content>
         <Footer

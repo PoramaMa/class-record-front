@@ -2,27 +2,29 @@ import { Button, Divider, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import { useParams } from "react-router-dom";
 import { env } from "../../env";
 
 const url = `${env.service_url}`;
 
-const ListClassroom = () => {
+const StudentInClass = () => {
+  const { id } = useParams();
+
   const [loading, setLoading] = useState(false);
 
   const [dataClassroomAll, setClassroomAll] = useState([]);
 
-  const fetchClassroomAll = async () => {
+  const fetchClassMapByRoomId = async (id) => {
     if (loading) {
       return;
     }
     setLoading(true);
     try {
-      const response = await axios.get(`${url}/classrooms`);
+      const response = await axios.get(`${url}/class-maps/room/${atob(id)}`);
       setClassroomAll(response.data);
+      console.log(response.data);
     } catch (err) {
-      console.log("fetchClassroomAll err :: ", err);
+      console.log("fetchClassMapByRoomId err :: ", err);
     } finally {
       setLoading(false);
     }
@@ -36,8 +38,8 @@ const ListClassroom = () => {
           content: "คุณแน่ใจหรือไม่ว่าต้องการลบ Classroom นี้ ?",
           onOk: async () => {
             try {
-              await axios.delete(`${url}/classrooms/${id}`);
-              await fetchClassroomAll();
+              await axios.delete(`${url}/class-maps/${id}`);
+              await fetchClassMapByRoomId();
             } catch (err) {
               console.log("err :: ", err);
             }
@@ -52,7 +54,7 @@ const ListClassroom = () => {
   };
 
   useEffect(() => {
-    fetchClassroomAll();
+    fetchClassMapByRoomId(id);
   }, []);
 
   return (
@@ -67,7 +69,7 @@ const ListClassroom = () => {
     >
       <InfiniteScroll
         dataLength={dataClassroomAll.length}
-        next={fetchClassroomAll}
+        next={fetchClassMapByRoomId}
         hasMore={dataClassroomAll.length < 0}
         loader={
           <Skeleton
@@ -93,22 +95,7 @@ const ListClassroom = () => {
                 }
                 description={`ครูประจำชั้น : ${item.teacher_name}, ปีการศึกษา ${item.academic_year}`}
               />
-              <Link
-                to={`/view-classroom/${btoa(
-                  item.classroom_id
-                )}?_=${uuidv4()}&ref=detail`}
-              >
-                <Button type="primary" style={{ "margin-right": "5px" }}>
-                  รายละเอียด
-                </Button>
-              </Link>
-              <Link
-                to={`/edit-classroom/${btoa(
-                  item.classroom_id
-                )}?_=${uuidv4()}&ref=edit`}
-              >
-                <Button style={{ "margin-right": "5px" }}>แก้ไข</Button>
-              </Link>
+
               <Button
                 onClick={() => deleteClassroom(item.classroom_id)}
                 style={{ "margin-right": "5px" }}
@@ -124,4 +111,4 @@ const ListClassroom = () => {
     </div>
   );
 };
-export default ListClassroom;
+export default StudentInClass;
