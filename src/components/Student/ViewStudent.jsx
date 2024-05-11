@@ -1,6 +1,7 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { env } from "../../env";
 const { Option } = Select;
@@ -47,9 +48,26 @@ const ViewStudent = () => {
 
   const fetchStudentById = async (id) => {
     try {
-      const response = await axios.get(`${url}/students/${id}`);
+      const response = await axios.get(`${url}/students/${atob(id)}`);
       setStudentById(response.data);
-      console.log(response.data);
+      const {
+        student_code,
+        title,
+        fname,
+        lname,
+        gender,
+        grade_level,
+        birthdate,
+      } = response.data;
+      form.setFieldsValue({
+        student_code,
+        title,
+        fname,
+        lname,
+        gender,
+        grade_level,
+        birthdate: moment(birthdate),
+      });
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
     }
@@ -57,11 +75,11 @@ const ViewStudent = () => {
 
   const onEditStudent = async (values) => {
     try {
-      await axios.patch(`${url}/students/`, values);
+      const result = await axios.patch(`${url}/students/${atob(id)}`, values);
       navigate("/students?ref=all");
     } catch (err) {
       alert(err.message);
-      console.log("onStudent err :: ", err);
+      console.log("onEditStudent err :: ", err);
     }
   };
 
@@ -203,9 +221,7 @@ const ViewStudent = () => {
             Submit
           </Button>
         ) : (
-          <Button danger onClick={onEdit}>
-            Edit
-          </Button>
+          <a onClick={onEdit}>Edit</a>
         )}
       </Form.Item>
     </Form>

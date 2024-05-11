@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, List, Skeleton } from "antd";
+import { Avatar, Button, Divider, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -29,9 +29,33 @@ const ListStudent = () => {
     }
   };
 
+  const deleteStudent = async (id) => {
+    try {
+      const confirmResult = await new Promise((resolve) => {
+        Modal.confirm({
+          title: "ยืนยันการลบ",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการลบนักเรียนคนนี้ ?",
+          onOk: async () => {
+            try {
+              await axios.delete(`${url}/students/${id}`);
+              await fetchStudentAll();
+            } catch (err) {
+              console.log("err :: ", err);
+            }
+            resolve(true);
+          },
+          onCancel: () => resolve(false),
+        });
+      });
+    } catch (err) {
+      console.log("err :: ", err);
+    }
+  };
+
   useEffect(() => {
     fetchStudentAll();
   }, []);
+
   return (
     <div
       id="scrollableDiv"
@@ -78,6 +102,14 @@ const ListStudent = () => {
               >
                 <Button type="primary">รายละเอียด</Button>
               </Link>
+              <Button
+                onClick={() => deleteStudent(item.student_id)}
+                style={{ margin: "0 5px" }}
+                type="primary"
+                danger
+              >
+                ลบ
+              </Button>
             </List.Item>
           )}
         />
