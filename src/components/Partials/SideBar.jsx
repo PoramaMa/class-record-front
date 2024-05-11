@@ -25,12 +25,12 @@ const items = [
       {
         key: "2",
         label: "List all",
-        path: "/students",
+        path: "/students?ref=all",
       },
       {
         key: "3",
         label: "Add student",
-        path: "/add-student",
+        path: "/add-student?ref=add",
       },
     ],
   },

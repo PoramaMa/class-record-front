@@ -76,7 +76,7 @@ const tailFormItemLayout = {
     },
   },
 };
-const App = () => {
+const FormStudent = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
@@ -369,4 +369,4 @@ const App = () => {
     </Form>
   );
 };
-export default App;
+export default FormStudent;
