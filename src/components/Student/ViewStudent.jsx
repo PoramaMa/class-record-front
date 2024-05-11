@@ -97,6 +97,8 @@ const ViewClassroom = () => {
           <b>ระดับชั้นประถมศึกษาปีที่ : {dataStudent.grade_level} </b>
           {}
         </p>
+        <hr />
+        <h3>ข้อมูลห้องเรียน</h3>
       </Card>
     </Space>
   );
