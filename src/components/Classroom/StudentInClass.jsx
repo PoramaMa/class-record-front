@@ -95,6 +95,7 @@ const StudentInClass = () => {
       title: "ระดับชั้น",
       dataIndex: "grade_level",
       key: "grade_level",
+      render: (text) => <p>ป.{text}</p>,
     },
     {
       title: "Action",
