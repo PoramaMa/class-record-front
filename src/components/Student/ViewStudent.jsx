@@ -113,7 +113,7 @@ const ViewClassroom = () => {
         width: "100%",
       }}
     >
-      <Card title="ข้อมูล" extra={<a href="#"></a>}>
+      <Card title="ข้อมูล" extra={<a href="#">.</a>}>
         <h3>ข้อมูลส่วนตัว</h3>
         <p>
           <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}

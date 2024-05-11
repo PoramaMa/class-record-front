@@ -1,4 +1,4 @@
-import { Avatar, Button, List, Modal, Skeleton } from "antd";
+import { Avatar, Button, List, Modal, Skeleton, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -30,6 +30,18 @@ const StudentInClass = () => {
     }
   };
 
+  const [dataStudent, setStudent] = useState([]);
+
+  const fetchStudentById = async () => {
+    try {
+      const response = await axios.get(`${url}/students/room/${atob(id)}`);
+      setStudent(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log("fetchStudentById err :: ", err);
+    }
+  };
+
   const deleteClassMap = async (id) => {
     try {
       const confirmResult = await new Promise((resolve) => {
@@ -55,7 +67,43 @@ const StudentInClass = () => {
 
   useEffect(() => {
     fetchClassMapByRoomId();
+    fetchStudentById();
   }, []);
+
+  const columns = [
+    {
+      title: "เลขประจำตัว",
+      dataIndex: "student_code",
+      key: "student_code",
+    },
+    {
+      title: "คำนำหน้า",
+      dataIndex: "title",
+      key: "title",
+    },
+    {
+      title: "ชื่อ",
+      dataIndex: "fname",
+      key: "fname",
+    },
+    {
+      title: "นามสกุล",
+      dataIndex: "lname",
+      key: "lname",
+    },
+    {
+      title: "ระดับชั้น",
+      dataIndex: "grade_level",
+      key: "grade_level",
+    },
+    {
+      title: "ลบ",
+      dataIndex: "",
+      key: "",
+    },
+  ];
+
+  const dataSource = dataStudent;
 
   return (
     <div
@@ -108,6 +156,7 @@ const StudentInClass = () => {
           )}
         />
       </InfiniteScroll>
+      <Table dataSource={dataSource} columns={columns} />
     </div>
   );
 };
