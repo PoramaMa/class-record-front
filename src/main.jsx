@@ -1,0 +1,27 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./view/App.jsx";
+import ClassRoom from "./view/ClassRoom.jsx";
+import Student from "./view/Student.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/student",
+    element: <Student />,
+  },
+  {
+    path: "/classroom",
+    element: <ClassRoom />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
