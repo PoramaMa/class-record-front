@@ -15,7 +15,6 @@ const ViewClassroom = () => {
     try {
       const response = await axios.get(`${url}/students/${atob(id)}`);
       setStudent(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
     }
