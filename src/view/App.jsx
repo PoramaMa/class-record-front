@@ -1,5 +1,6 @@
-import { Layout, theme } from "antd";
-import React from "react";
+import { Layout, theme, Input } from "antd";
+const { Search } = Input;
+import React, { useEffect, useState } from "react";
 
 import Header from "../components/Partials/Header";
 import SideBar from "../components/Partials/SideBar";
@@ -8,6 +9,10 @@ import Footer from "../components/Partials/Footer";
 const { Content } = Layout;
 
 const App = () => {
+  const [dataSearch, setDataSearch] = useState("");
+
+  const [isSearch, setIsSearch] = useState(false);
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -35,7 +40,12 @@ const App = () => {
               height: "80vh",
             }}
           >
-            <p>long content</p>
+            <Search
+              placeholder="input search text"
+              enterButton="Search"
+              size="large"
+              loading
+            />
           </div>
         </Content>
         <Footer />

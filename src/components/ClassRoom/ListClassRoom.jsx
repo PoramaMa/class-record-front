@@ -32,6 +32,7 @@ const ListClassroom = () => {
       console.log("fetchClassroomAll err :: ", err);
     } finally {
       setLoading(false);
+      setIsSearch(false);
     }
   };
 
@@ -65,6 +66,7 @@ const ListClassroom = () => {
   const handleSearchChange = (event) => {
     query = event.target.value;
     setDataSearch(event.target.value);
+    setIsSearch(true);
     fetchClassroomAll();
   };
 

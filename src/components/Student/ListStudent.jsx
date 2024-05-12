@@ -33,6 +33,7 @@ const ListStudent = () => {
       console.log("fetchStudentAll err :: ", err);
     } finally {
       setLoading(false);
+      setIsSearch(false);
     }
   };
 
@@ -66,6 +67,7 @@ const ListStudent = () => {
   const handleSearchChange = (event) => {
     query = event.target.value;
     setDataSearch(event.target.value);
+    setIsSearch(true);
     fetchStudentAll();
   };
 
