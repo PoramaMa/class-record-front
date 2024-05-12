@@ -1,8 +1,9 @@
 import { Layout, theme } from "antd";
 import React from "react";
-import Footer from "../components/Partials/Footer";
+
 import Header from "../components/Partials/Header";
 import SideBar from "../components/Partials/SideBar";
+import Footer from "../components/Partials/Footer";
 
 const { Content } = Layout;
 

@@ -6,9 +6,12 @@ import EditClassroom from "../components/Classroom/EditClassroom";
 import FormClassroom from "../components/Classroom/FormClassroom";
 import ListClassroom from "../components/Classroom/ListClassroom";
 import ViewClassroom from "../components/Classroom/ViewClassroom";
+
+import Footer from "../components/Partials/Footer";
+import Header from "../components/Partials/Header";
 import SideBar from "../components/Partials/SideBar";
 
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
 const Classroom = () => {
   const [ref, setRef] = useState("");
@@ -41,12 +44,7 @@ const Classroom = () => {
           marginLeft: 200,
         }}
       >
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
+        <Header />
         <Content
           style={{
             margin: "24px 16px 0",
@@ -77,13 +75,7 @@ const Classroom = () => {
             {ref === "detail" && <ViewClassroom />}
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+        <Footer />
       </Layout>
     </Layout>
   );

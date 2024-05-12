@@ -2,13 +2,16 @@ import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import SideBar from "../components/Partials/SideBar";
 import EditStudent from "../components/Student/EditStudent";
 import FormStudent from "../components/Student/FormStudent";
 import ListStudent from "../components/Student/ListStudent";
 import ViewStudent from "../components/Student/ViewStudent";
 
-const { Header, Content, Footer } = Layout;
+import Footer from "../components/Partials/Footer";
+import Header from "../components/Partials/Header";
+import SideBar from "../components/Partials/SideBar";
+
+const { Content } = Layout;
 
 const Student = () => {
   const [ref, setRef] = useState("");
@@ -41,12 +44,7 @@ const Student = () => {
           marginLeft: 200,
         }}
       >
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
+        <Header />
         <Content
           style={{
             margin: "24px 16px 0",
@@ -78,13 +76,7 @@ const Student = () => {
             {ref === "detail" && <ViewStudent />}
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+        <Footer />
       </Layout>
     </Layout>
   );
