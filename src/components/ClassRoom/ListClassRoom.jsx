@@ -12,11 +12,13 @@ const url = `${env.service_url}`;
 const ListClassroom = () => {
   const [loading, setLoading] = useState(false);
 
-  const [dataSearch, setDataSearch] = useState("สมหญิง");
+  const [dataSearch, setDataSearch] = useState("");
 
   const [isSearch, setIsSearch] = useState(false);
 
   const [dataClassroomAll, setClassroomAll] = useState([]);
+
+  let query = "";
 
   const fetchClassroomAll = async () => {
     if (loading) {
@@ -24,7 +26,7 @@ const ListClassroom = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.get(`${url}/classrooms?q=${dataSearch}`);
+      const response = await axios.get(`${url}/classrooms?q=${query}`);
       setClassroomAll(response.data);
     } catch (err) {
       console.log("fetchClassroomAll err :: ", err);
@@ -61,8 +63,9 @@ const ListClassroom = () => {
   }, []);
 
   const handleSearchChange = (event) => {
+    query = event.target.value;
     setDataSearch(event.target.value);
-    console.log(event.target.value);
+    fetchClassroomAll();
   };
 
   return (
