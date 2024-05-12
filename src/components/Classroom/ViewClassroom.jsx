@@ -13,7 +13,7 @@ const url = `${env.service_url}`;
 const tabListNoTitle = [
   {
     key: "student",
-    label: "รายชื่อนักเรียน",
+    label: "รายชื่อนักเรียนในห้อง",
   },
   {
     key: "detail",
