@@ -12,6 +12,8 @@ const url = `${env.service_url}`;
 const ListClassroom = () => {
   const [loading, setLoading] = useState(false);
 
+  const [dataSearch, setDataSearch] = useState("สมหญิง");
+
   const [isSearch, setIsSearch] = useState(false);
 
   const [dataClassroomAll, setClassroomAll] = useState([]);
@@ -22,7 +24,7 @@ const ListClassroom = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.get(`${url}/classrooms`);
+      const response = await axios.get(`${url}/classrooms?q=${dataSearch}`);
       setClassroomAll(response.data);
     } catch (err) {
       console.log("fetchClassroomAll err :: ", err);
@@ -58,6 +60,11 @@ const ListClassroom = () => {
     fetchClassroomAll();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setDataSearch(event.target.value);
+    console.log(event.target.value);
+  };
+
   return (
     <>
       <Search
@@ -66,6 +73,7 @@ const ListClassroom = () => {
         }}
         placeholder="ค้นหา เลขที่ห้อง, ชื่อห้อง, ครูประจำชั้น"
         loading={isSearch && isSearch}
+        onChange={handleSearchChange}
         enterButton
       />
       <br />
