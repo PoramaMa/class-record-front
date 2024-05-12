@@ -11,14 +11,17 @@ const { Option } = Select;
 
 const url = `${env.service_url}`;
 
+let query = "";
+let academicYearQuery = "";
+let gradeLevelQuery = "";
+let classroomQuery = "";
+
 const ListStudent = () => {
   const [loading, setLoading] = useState(false);
 
   const [dataSearch, setDataSearch] = useState("");
 
   const [isSearch, setIsSearch] = useState(false);
-
-  let query = "";
 
   const [dataStudentAll, setStudentAll] = useState([]);
 
@@ -28,7 +31,10 @@ const ListStudent = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.get(`${url}/students/?q=${query}`);
+      const response = await axios.get(
+        `${url}/students/?q=${query}&class=${classroomQuery}&year=${academicYearQuery}&grade=${gradeLevelQuery}`
+      );
+      // console.log(response.config.url);
       setStudentAll(response.data);
     } catch (err) {
       console.log("fetchStudentAll err :: ", err);
@@ -84,6 +90,24 @@ const ListStudent = () => {
     fetchStudentAll();
   };
 
+  const handleYearChange = (value) => {
+    academicYearQuery = value;
+    setIsSearch(true);
+    fetchStudentAll();
+  };
+
+  const handleGradeChange = (value) => {
+    gradeLevelQuery = value;
+    setIsSearch(true);
+    fetchStudentAll();
+  };
+
+  const handleClassroomChange = (value) => {
+    classroomQuery = value;
+    setIsSearch(true);
+    fetchStudentAll();
+  };
+
   return (
     <>
       <div
@@ -92,11 +116,13 @@ const ListStudent = () => {
         }}
       >
         <Select
+          onChange={handleYearChange}
           placeholder="ปีการศึกษา"
           style={{
             marginRight: 10,
           }}
         >
+          <Option value="">ทั้งหมด</Option>
           {[...Array(21)].map((_, index) => {
             const year = 2550 + index;
             return (
@@ -107,21 +133,25 @@ const ListStudent = () => {
           })}
         </Select>
         <Select
+          onChange={handleGradeChange}
           placeholder="ระดับชั้น"
           style={{
             marginRight: 10,
           }}
         >
+          <Option value="">ทั้งหมด</Option>
           <Option value="1">ป.1</Option>
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
         </Select>
         <Select
+          onChange={handleClassroomChange}
           placeholder="ห้องเรียน"
           style={{
             marginRight: 10,
           }}
         >
+          <Option value="">ทั้งหมด</Option>
           {dataClassroomAll.map((classroom) => (
             <Option key={classroom.classroom_id} value={classroom.classroom_id}>
               {classroom.room_number}
