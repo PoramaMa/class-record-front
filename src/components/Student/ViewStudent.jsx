@@ -115,32 +115,39 @@ const ViewClassroom = () => {
       }}
     >
       <Card title="ข้อมูล" extra={<a href="#">.</a>}>
-        <h3>ข้อมูลส่วนตัว</h3>
-        <p>
-          <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}
-          {dataStudent.lname}
-        </p>
-        <p>
-          {" "}
-          <b>เพศ : </b>
-          {dataStudent.gender}
-        </p>
-        <p>
-          <b>วัน-เดือน-ปีเกิด : </b>
-          {formatDateThai(dataStudent.birthdate)}
-        </p>
-        <p>
-          <b>อายุ : </b>
-          {calculateAge(dataStudent.birthdate)} ปี
-        </p>
-        <h3>ข้อมูลนักเรียน</h3>
-        <p>
-          <b>เลขประจำตัว : </b> {dataStudent.student_code}
-        </p>
-        <p>
-          <b>ระดับชั้นประถมศึกษาปีที่ : {dataStudent.grade_level} </b>
-          {}
-        </p>
+        <div style={{ justifyContent: "space-between", display: "flex" }}>
+          <div style={{ width: "50%" }}>
+            <h3>ข้อมูลนักเรียน</h3>
+            <p>
+              <b>ชื่อ - สกุล : </b> {dataStudent.title} {dataStudent.fname}{" "}
+              {dataStudent.lname}
+            </p>
+            <p>
+              <b>เลขประจำตัว : </b> {dataStudent.student_code}
+            </p>
+            <p>
+              <b>ระดับชั้นประถมศึกษาปีที่ : {dataStudent.grade_level} </b>
+              {}
+            </p>
+          </div>
+          <div style={{ width: "50%" }}>
+            <h3>ข้อมูลส่วนตัว</h3>
+
+            <p>
+              {" "}
+              <b>เพศ : </b>
+              {dataStudent.gender}
+            </p>
+            <p>
+              <b>วัน-เดือน-ปีเกิด : </b>
+              {formatDateThai(dataStudent.birthdate)}
+            </p>
+            <p>
+              <b>อายุ : </b>
+              {calculateAge(dataStudent.birthdate)} ปี
+            </p>
+          </div>
+        </div>
         <hr />
         <h3>ข้อมูลห้องเรียน</h3>
         <Table dataSource={dataSource} columns={columns} />
