@@ -1,4 +1,4 @@
-import { Avatar, Button, Input, List, Modal, Skeleton } from "antd";
+import { Avatar, Button, Input, List, Modal, Select, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
 const { Search } = Input;
+const { Option } = Select;
 
 const url = `${env.service_url}`;
 
@@ -37,6 +38,17 @@ const ListStudent = () => {
     }
   };
 
+  const [dataClassroomAll, setClassroomAll] = useState([]);
+
+  const fetchClassroomAll = async () => {
+    try {
+      const response = await axios.get(`${url}/classrooms`);
+      setClassroomAll(response.data);
+    } catch (err) {
+      console.log("fetchClassroomAll err :: ", err);
+    }
+  };
+
   const deleteStudent = async (id) => {
     try {
       const confirmResult = await new Promise((resolve) => {
@@ -62,6 +74,7 @@ const ListStudent = () => {
 
   useEffect(() => {
     fetchStudentAll();
+    fetchClassroomAll();
   }, []);
 
   const handleSearchChange = (event) => {
@@ -73,16 +86,59 @@ const ListStudent = () => {
 
   return (
     <>
-      <Search
+      <div
         style={{
-          marginBottom: 20,
+          display: "flex",
         }}
-        placeholder="ค้นหาด้วย เลขประจำตัวนักเรียน, ชื่อ, นามสกุล"
-        loading={isSearch && isSearch}
-        onChange={handleSearchChange}
-        enterButton
-      />
-      <br />
+      >
+        <Select
+          placeholder="ปีการศึกษา"
+          style={{
+            marginRight: 10,
+          }}
+        >
+          {[...Array(21)].map((_, index) => {
+            const year = 2550 + index;
+            return (
+              <Option key={year} value={year.toString()}>
+                {year}
+              </Option>
+            );
+          })}
+        </Select>
+        <Select
+          placeholder="ระดับชั้น"
+          style={{
+            marginRight: 10,
+          }}
+        >
+          <Option value="1">ป.1</Option>
+          <Option value="2">ป.2</Option>
+          <Option value="3">ป.3</Option>
+        </Select>
+        <Select
+          placeholder="ห้องเรียน"
+          style={{
+            marginRight: 10,
+          }}
+        >
+          {dataClassroomAll.map((classroom) => (
+            <Option key={classroom.classroom_id} value={classroom.classroom_id}>
+              {classroom.room_number}
+            </Option>
+          ))}
+        </Select>
+        <Search
+          style={{
+            marginBottom: 20,
+          }}
+          placeholder="ค้นหาด้วย เลขประจำตัวนักเรียน, ชื่อ, นามสกุล"
+          loading={isSearch && isSearch}
+          onChange={handleSearchChange}
+          enterButton
+        />
+      </div>
+
       <div
         id="scrollableDiv"
         style={{
