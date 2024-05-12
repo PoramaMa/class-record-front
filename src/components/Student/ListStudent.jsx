@@ -77,7 +77,7 @@ const ListStudent = () => {
         style={{
           marginBottom: 20,
         }}
-        placeholder="ค้นหา เลขที่ห้อง, ชื่อห้อง, ครูประจำชั้น"
+        placeholder="ค้นหาด้วย เลขประจำตัวนักเรียน, ชื่อ, นามสกุล"
         loading={isSearch && isSearch}
         onChange={handleSearchChange}
         enterButton
