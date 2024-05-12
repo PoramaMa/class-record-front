@@ -69,7 +69,7 @@ const FormClassroom = () => {
     >
       <Form.Item
         name="room_number"
-        label="Room Number"
+        label="เลขที่ห้อง"
         tooltip="123456"
         rules={[
           {
@@ -84,7 +84,7 @@ const FormClassroom = () => {
 
       <Form.Item
         name="room_name"
-        label="Room Name"
+        label="ชื่อห้อง"
         rules={[
           {
             required: true,
@@ -98,7 +98,7 @@ const FormClassroom = () => {
 
       <Form.Item
         name="grade_level"
-        label="Grade Level"
+        label="ระดับชั้น"
         rules={[
           {
             required: true,
@@ -115,7 +115,7 @@ const FormClassroom = () => {
 
       <Form.Item
         name="academic_year"
-        label="Academic Year"
+        label="ปีการศึกษา"
         tooltip="พ.ศ."
         rules={[
           {
@@ -138,7 +138,7 @@ const FormClassroom = () => {
 
       <Form.Item
         name="teacher_name"
-        label="Teacher Name"
+        label="ชื่อคุณครูประจำชั้น"
         rules={[
           {
             required: true,
