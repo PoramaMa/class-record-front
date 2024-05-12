@@ -131,7 +131,7 @@ const ViewClassroom = () => {
         </p>
         <p>
           <b>อายุ : </b>
-          {calculateAge(dataStudent.birthdate)}
+          {calculateAge(dataStudent.birthdate)} ปี
         </p>
         <h3>ข้อมูลนักเรียน</h3>
         <p>

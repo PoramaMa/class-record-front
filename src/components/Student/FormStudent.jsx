@@ -69,7 +69,7 @@ const FormStudent = () => {
     >
       <Form.Item
         name="student_code"
-        label="Student Code"
+        label="เลขประจำตัวนักเรียน"
         tooltip="123456"
         rules={[
           {
@@ -84,7 +84,7 @@ const FormStudent = () => {
 
       <Form.Item
         name="title"
-        label="Title"
+        label="คำนำหน้า"
         rules={[
           {
             required: true,
@@ -100,7 +100,7 @@ const FormStudent = () => {
 
       <Form.Item
         name="fname"
-        label="First Name"
+        label="ชื่อจริง"
         tooltip="What do you want others to call you?"
         rules={[
           {
@@ -115,7 +115,7 @@ const FormStudent = () => {
 
       <Form.Item
         name="lname"
-        label="Last Name"
+        label="นามสกุล"
         tooltip="What do you want others to call you?"
         rules={[
           {
@@ -130,7 +130,7 @@ const FormStudent = () => {
 
       <Form.Item
         name="gender"
-        label="Gender"
+        label="เพศ"
         rules={[
           {
             required: true,
@@ -146,8 +146,20 @@ const FormStudent = () => {
       </Form.Item>
 
       <Form.Item
+        name="birthdate"
+        label="วันเกิด"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <DatePicker />
+      </Form.Item>
+
+      <Form.Item
         name="grade_level"
-        label="Grade Level"
+        label="ระดับชั้น"
         rules={[
           {
             required: true,
@@ -160,18 +172,6 @@ const FormStudent = () => {
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
         </Select>
-      </Form.Item>
-
-      <Form.Item
-        name="birthdate"
-        label="Birth Date"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <DatePicker />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
