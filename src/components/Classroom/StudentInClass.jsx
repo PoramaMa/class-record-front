@@ -1,20 +1,9 @@
-import {
-  Avatar,
-  Button,
-  List,
-  Modal,
-  Skeleton,
-  Table,
-  Space,
-  Input,
-} from "antd";
-const { Search } = Input;
+import { Button, Input, Modal, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
-import img_user from "../../assets/images/user.png";
 import { env } from "../../env";
+const { Search } = Input;
 
 const url = `${env.service_url}`;
 
@@ -46,7 +35,6 @@ const StudentInClass = () => {
     try {
       const response = await axios.get(`${url}/students/room/${atob(id)}`);
       setStudent(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log("fetchStudentById err :: ", err);
     }

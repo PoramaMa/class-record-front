@@ -16,9 +16,9 @@ const ListClassroom = () => {
 
   const [isSearch, setIsSearch] = useState(false);
 
-  const [dataClassroomAll, setClassroomAll] = useState([]);
-
   let query = "";
+
+  const [dataClassroomAll, setClassroomAll] = useState([]);
 
   const fetchClassroomAll = async () => {
     if (loading) {
