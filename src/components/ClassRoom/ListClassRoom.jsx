@@ -1,11 +1,11 @@
-import { Button, List, Modal, Skeleton, Input } from "antd";
-const { Search } = Input;
+import { Button, Input, List, Modal, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { env } from "../../env";
+const { Search } = Input;
 
 const url = `${env.service_url}`;
 
@@ -112,9 +112,13 @@ const ListClassroom = () => {
               <List.Item key={item.fname}>
                 <List.Item.Meta
                   title={
-                    <a href="#">
+                    <Link
+                      to={`/view-classroom/${btoa(
+                        item.classroom_id
+                      )}?_=${uuidv4()}&ref=detail`}
+                    >
                       เลขที่ห้อง : {item.room_number} {item.room_name}
-                    </a>
+                    </Link>
                   }
                   description={`ครูประจำชั้น : ${item.teacher_name}, ป.${item.grade_level}, ปีการศึกษา ${item.academic_year}`}
                 />
