@@ -53,133 +53,135 @@ const FormStudent = () => {
   };
 
   return (
-    <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onStudent}
-      initialValues={{
-        residence: ["zhejiang", "hangzhou", "xihu"],
-        prefix: "86",
-      }}
-      style={{
-        maxWidth: 950,
-      }}
-      scrollToFirstError
-    >
-      <Form.Item
-        name="student_code"
-        label="เลขประจำตัวนักเรียน"
-        tooltip="123456"
-        rules={[
-          {
-            required: true,
-            message: "Please input your student code!",
-            whitespace: true,
-          },
-        ]}
+    <div>
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onStudent}
+        initialValues={{
+          residence: ["zhejiang", "hangzhou", "xihu"],
+          prefix: "86",
+        }}
+        style={{
+          maxWidth: 950,
+        }}
+        scrollToFirstError
       >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          name="student_code"
+          label="เลขประจำตัวนักเรียน"
+          tooltip="123456"
+          rules={[
+            {
+              required: true,
+              message: "Please input your student code!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        name="title"
-        label="คำนำหน้า"
-        rules={[
-          {
-            required: true,
-            message: "Please select title!",
-          },
-        ]}
-      >
-        <Select placeholder="select your title">
-          <Option value="ด.ช.">ด.ช.</Option>
-          <Option value="ด.ญ.">ด.ญ.</Option>
-        </Select>
-      </Form.Item>
+        <Form.Item
+          name="title"
+          label="คำนำหน้า"
+          rules={[
+            {
+              required: true,
+              message: "Please select title!",
+            },
+          ]}
+        >
+          <Select placeholder="select your title">
+            <Option value="ด.ช.">ด.ช.</Option>
+            <Option value="ด.ญ.">ด.ญ.</Option>
+          </Select>
+        </Form.Item>
 
-      <Form.Item
-        name="fname"
-        label="ชื่อจริง"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your First Name!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          name="fname"
+          label="ชื่อจริง"
+          tooltip="What do you want others to call you?"
+          rules={[
+            {
+              required: true,
+              message: "Please input your First Name!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        name="lname"
-        label="นามสกุล"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Last Name!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          name="lname"
+          label="นามสกุล"
+          tooltip="What do you want others to call you?"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Last Name!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        name="gender"
-        label="เพศ"
-        rules={[
-          {
-            required: true,
-            message: "Please select gender!",
-          },
-        ]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="ชาย">ชาย</Option>
-          <Option value="หญิง">หญิง</Option>
-          <Option value="อื่นๆ">อื่นๆ</Option>
-        </Select>
-      </Form.Item>
+        <Form.Item
+          name="gender"
+          label="เพศ"
+          rules={[
+            {
+              required: true,
+              message: "Please select gender!",
+            },
+          ]}
+        >
+          <Select placeholder="select your gender">
+            <Option value="ชาย">ชาย</Option>
+            <Option value="หญิง">หญิง</Option>
+            <Option value="อื่นๆ">อื่นๆ</Option>
+          </Select>
+        </Form.Item>
 
-      <Form.Item
-        name="birthdate"
-        label="วันเกิด"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item>
+        <Form.Item
+          name="birthdate"
+          label="วันเกิด"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
 
-      <Form.Item
-        name="grade_level"
-        label="ระดับชั้น"
-        rules={[
-          {
-            required: true,
-            message: "Please select Grade Level!",
-          },
-        ]}
-      >
-        <Select placeholder="select your Grade Level">
-          <Option value="1">ป.1</Option>
-          <Option value="2">ป.2</Option>
-          <Option value="3">ป.3</Option>
-        </Select>
-      </Form.Item>
+        <Form.Item
+          name="grade_level"
+          label="ระดับชั้น"
+          rules={[
+            {
+              required: true,
+              message: "Please select Grade Level!",
+            },
+          ]}
+        >
+          <Select placeholder="select your Grade Level">
+            <Option value="1">ป.1</Option>
+            <Option value="2">ป.2</Option>
+            <Option value="3">ป.3</Option>
+          </Select>
+        </Form.Item>
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 export default FormStudent;

@@ -243,6 +243,7 @@ const ListStudent = () => {
           />
         </InfiniteScroll>
       </div>
+      <p>จำนวนนักเรียนทั้งหมด : {dataStudentAll.length} คน</p>
     </>
   );
 };

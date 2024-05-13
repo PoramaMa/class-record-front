@@ -151,6 +151,7 @@ const ListClassroom = () => {
           />
         </InfiniteScroll>
       </div>
+      <p>จำนวนห้องเรียนทั้งหมด : {dataClassroomAll.length} ห้อง</p>
     </>
   );
 };

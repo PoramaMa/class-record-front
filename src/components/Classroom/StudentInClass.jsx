@@ -118,16 +118,24 @@ const StudentInClass = () => {
   const dataSource = dataStudent;
 
   return (
-    <div
-      id="scrollableDiv"
-      style={{
-        height: 400,
-        overflow: "auto",
-        padding: "0 16px",
-      }}
-    >
-      <Table dataSource={dataSource} columns={columns} />
-    </div>
+    <>
+      <div
+        id="scrollableDiv"
+        style={{
+          overflow: "auto",
+          padding: "0 16px",
+        }}
+      >
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{
+            pageSize: 4, // จำนวนรายการต่อหน้า
+          }}
+        />
+      </div>
+      <p>จำนวนนักเรียนในห้อง : {dataStudent.length} คน</p>
+    </>
   );
 };
 export default StudentInClass;

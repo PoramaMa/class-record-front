@@ -149,8 +149,15 @@ const ViewClassroom = () => {
           </div>
         </div>
         <hr />
-        <h3>ข้อมูลห้องเรียน</h3>
-        <Table dataSource={dataSource} columns={columns} />
+        <h3>ข้อมูลห้องเรียน ที่นักเรียนลงทะเบียนไว้</h3>
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{
+            pageSize: 4,
+          }}
+        />
+        <p>จำนวนห้องเรียน : {dataClassroom.length} ห้อง</p>
       </Card>
     </Space>
   );
