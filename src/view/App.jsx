@@ -109,11 +109,11 @@ const App = () => {
             {[1, 2, 3].map((level) => (
               <Card
                 key={`grade${level}`}
-                extra={`จำนวนทั้งหมด นักเรียน : ${
-                  dataStudent[`dataStudentGrade${level}`]?.length || 0
-                } / ห้อง : ${
+                extra={`จำนวนห้องเรียนทั้งหมด : ${
                   dataClassroom[`dataClassroomGrade${level}`]?.length || 0
-                } `}
+                } ห้อง | จำนวนนักเรียนทั้งหมด ${
+                  dataStudent[`dataStudentGrade${level}`]?.length || 0
+                } คน`}
                 type="inner"
                 title={`ชั้นประถมศึกษาปีที่ ${level}`}
                 style={{
@@ -128,17 +128,18 @@ const App = () => {
                 >
                   <Table
                     style={{ width: "49%" }}
-                    columns={columnStudents}
-                    dataSource={dataStudent[`dataStudentGrade${level}`]}
+                    columns={columnsClass}
+                    dataSource={dataClassroom[`dataClassroomGrade${level}`]}
                     pagination={{
                       pageSize: 4, // จำนวนรายการต่อหน้า
                     }}
                     loading={loading}
                   />
+
                   <Table
                     style={{ width: "49%" }}
-                    columns={columnsClass}
-                    dataSource={dataClassroom[`dataClassroomGrade${level}`]}
+                    columns={columnStudents}
+                    dataSource={dataStudent[`dataStudentGrade${level}`]}
                     pagination={{
                       pageSize: 4, // จำนวนรายการต่อหน้า
                     }}
