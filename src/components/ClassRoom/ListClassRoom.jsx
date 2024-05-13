@@ -128,7 +128,7 @@ const ListClassroom = () => {
                   )}?_=${uuidv4()}&ref=detail`}
                 >
                   <Button type="primary" style={{ "margin-right": "5px" }}>
-                    ลงทะเบียนนักเรียน
+                    รายละเอียด
                   </Button>
                 </Link>
                 <Link

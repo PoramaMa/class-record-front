@@ -50,6 +50,23 @@ const items = [
       },
     ],
   },
+  {
+    key: "sub3",
+    label: "ทะเบียนนักเรียน",
+    icon: <AppstoreOutlined />,
+    children: [
+      {
+        key: "6",
+        label: "รายการทะเบียน",
+        path: "/register?ref=all",
+      },
+      {
+        key: "7",
+        label: "ลงทะเบียนนักเรียน",
+        path: "/add-register?ref=add",
+      },
+    ],
+  },
 ];
 
 const SideBar = () => {
@@ -88,7 +105,7 @@ const SideBar = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1", "sub2"]}
+          defaultOpenKeys={["sub1", "sub2", "sub3"]}
         >
           {items.map((item) =>
             item.children ? (
