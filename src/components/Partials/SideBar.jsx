@@ -6,7 +6,6 @@ import {
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 

@@ -79,6 +79,10 @@ const ListStudent = () => {
   };
 
   useEffect(() => {
+    query = "";
+    academicYearQuery = "";
+    gradeLevelQuery = "";
+    classroomQuery = "";
     fetchStudentAll();
     fetchClassroomAll();
   }, []);
