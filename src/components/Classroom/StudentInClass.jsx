@@ -42,7 +42,7 @@ const StudentInClass = () => {
 
   const deleteClassMap = async (id) => {
     try {
-      const confirmResult = await new Promise((resolve) => {
+      await new Promise((resolve) => {
         Modal.confirm({
           title: "ยืนยันการลบ",
           content: "คุณแน่ใจหรือไม่ว่าต้องการลบนักเรียนออกจาก Classroom นี้ ?",
