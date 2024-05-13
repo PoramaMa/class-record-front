@@ -102,7 +102,9 @@ const ViewClassroom = () => {
                 student_id: student_id,
                 classroom_id: atob(id),
               });
+              window.location.reload();
             } catch (err) {
+              alert(err.response.data.message);
               console.log("addClassMap.post err :: ", err);
             }
             resolve(true);
@@ -110,7 +112,6 @@ const ViewClassroom = () => {
           onCancel: () => resolve(false),
         });
       });
-      window.location.reload();
     } catch (err) {
       console.log("addClassMap err :: ", err);
     }
