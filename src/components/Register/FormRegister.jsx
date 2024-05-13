@@ -1,4 +1,13 @@
-import { Avatar, Button, Form, Input, List, Select, Skeleton } from "antd";
+import {
+  Avatar,
+  Button,
+  Form,
+  Input,
+  List,
+  Modal,
+  Select,
+  Skeleton,
+} from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -143,6 +152,7 @@ const FormRegister = () => {
     form.setFieldsValue({
       classroom_id,
     });
+    query = "";
     setIsSearchClassroom(false);
     setDataSearchClassroom("");
   };
@@ -151,20 +161,35 @@ const FormRegister = () => {
     form.setFieldsValue({
       student_id,
     });
-    classroomQuery = "";
+    query = "";
     academicYearQuery = "";
     gradeLevelQuery = "";
+    classroomQuery = "";
     setIsSearchStudent(false);
     setDataSearchStudent("");
   };
 
-  const onStudent = async (values) => {
+  const addClassMap = async (values) => {
     try {
-      await axios.post(`${url}/students`, values);
-      navigate("/students?ref=all");
+      await new Promise((resolve) => {
+        Modal.confirm({
+          title: "ยืนยันการบันทึก",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการบันทึกการลงทะเบียนเรียนนี้ ?",
+          onOk: async () => {
+            try {
+              await axios.post(`${url}/class-maps`, values);
+              navigate("/register?ref=all");
+            } catch (err) {
+              console.log("addClassMap.post err :: ", err);
+            }
+            resolve(true);
+          },
+          onCancel: () => resolve(false),
+        });
+      });
     } catch (err) {
       alert(err.message);
-      console.log("onStudent err :: ", err);
+      console.log("addClassMap err :: ", err);
     }
   };
 
@@ -182,7 +207,6 @@ const FormRegister = () => {
           loading={isSearch && isSearch}
           onChange={handleSearchClassroomChange}
           onFocus={() => setIsSearchClassroom(true)}
-          // onBlur={() => setIsSearchClassroom(false)}
           enterButton
         />
       </div>
@@ -375,18 +399,18 @@ const FormRegister = () => {
         {...formItemLayout}
         form={form}
         name="register"
-        onFinish={onStudent}
+        onFinish={addClassMap}
         initialValues={{
           residence: ["zhejiang", "hangzhou", "xihu"],
           prefix: "86",
         }}
         style={{
           marginTop: "10px",
-          maxWidth: 950,
         }}
         scrollToFirstError
       >
         <Form.Item
+          style={{ width: "90%" }}
           name="classroom_id"
           label="ห้องเรียน"
           rules={[
@@ -395,7 +419,7 @@ const FormRegister = () => {
             },
           ]}
         >
-          <Select disabled={true}>
+          <Select disabled={true} style={{ width: "715px" }}>
             {dataClassroomAll.map((classroom) => (
               <Option
                 key={classroom.classroom_id}
@@ -408,6 +432,7 @@ const FormRegister = () => {
         </Form.Item>
 
         <Form.Item
+          style={{ width: "90%" }}
           name="student_id"
           label="นักเรียน"
           rules={[
@@ -416,7 +441,7 @@ const FormRegister = () => {
             },
           ]}
         >
-          <Select disabled={true}>
+          <Select disabled={true} style={{ width: "715px" }}>
             {dataStudentAll.map((student) => (
               <Option key={student.student_id} value={student.student_id}>
                 {student.title} {student.fname} {student.lname}

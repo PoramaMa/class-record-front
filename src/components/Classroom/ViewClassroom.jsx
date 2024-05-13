@@ -94,7 +94,7 @@ const ViewClassroom = () => {
     try {
       await new Promise((resolve) => {
         Modal.confirm({
-          title: "ยืนยันการลบ",
+          title: "ยืนยันการบันทึก",
           content: "คุณแน่ใจหรือไม่ว่าต้องการเพิ่มนักเรียนเข้า Classroom นี้ ?",
           onOk: async () => {
             try {
