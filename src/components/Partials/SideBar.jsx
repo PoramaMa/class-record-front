@@ -76,7 +76,12 @@ const SideBar = () => {
             margin: "10px auto",
           }}
         />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["sub1", "sub2"]}
+        >
           {items.map((item) =>
             item.children ? (
               <SubMenu key={item.key} icon={item.icon} title={item.label}>
