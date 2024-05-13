@@ -20,49 +20,57 @@ const App = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [dataStudent, setStudent] = useState([]);
+  const [dataStudent, setDataStudent] = useState({});
+  const [dataClassroom, setDataClassroom] = useState({});
 
-  const fetchStudentByGradeLevel = async (level) => {
+  const fetchStudentAndClassroomByGradeLevel = async (level) => {
     try {
-      const response = await axios.get(`${url}/students/grade/${level}`);
-      setStudent(response.data);
-      // console.log(response.data);
+      const studentResponse = await axios.get(`${url}/students/grade/${level}`);
+      const classroomResponse = await axios.get(
+        `${url}/classrooms/grade/${level}`
+      );
+
+      const studentKey = `dataStudentGrade${level}`;
+      const classroomKey = `dataClassroomGrade${level}`;
+
+      setDataStudent((prevData) => ({
+        ...prevData,
+        [studentKey]: studentResponse.data,
+      }));
+
+      setDataClassroom((prevData) => ({
+        ...prevData,
+        [classroomKey]: classroomResponse.data,
+      }));
     } catch (err) {
-      console.log("fetchStudentByGradeLevel err :: ", err);
+      console.log(
+        `fetchStudentAndClassroomByGradeLevel(${level}) err :: `,
+        err
+      );
     }
   };
 
   useEffect(() => {
-    fetchStudentByGradeLevel(1);
-    fetchStudentByGradeLevel(2);
-    fetchStudentByGradeLevel(3);
+    for (let i = 1; i <= 3; i++) {
+      fetchStudentAndClassroomByGradeLevel(i);
+    }
   }, []);
 
-  const dataSource = [
+  const columnsClass = [
     {
-      key: "1",
-      name: 1,
-      age: 32,
-      address: 20,
+      title: "เลขที่ห้อง",
+      dataIndex: "room_number",
+      key: "room_number",
     },
-    {
-      key: "2",
-      name: 2,
-      age: 42,
-      address: 15,
-    },
-  ];
-
-  const columns = [
     {
       title: "ห้องเรียน",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "room_name",
+      key: "room_name",
     },
     {
       title: "จำนวนนักเรียนในห้อง",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "class_maps",
+      render: (classMaps) => classMaps.length,
     },
   ];
 
@@ -74,14 +82,8 @@ const App = () => {
     },
     {
       title: "ชื่อจริง - นามสกุล",
-      dataIndex: "lname",
-      key: "lname",
-      render: (_, dataStudent) => (
-        <p>
-          {dataStudent.title}
-          {dataStudent.fname} {dataStudent.lname}
-        </p>
-      ),
+      render: (text, record) =>
+        `${record.title} ${record.fname} ${record.lname}`,
     },
   ];
 
@@ -101,66 +103,31 @@ const App = () => {
           }}
         >
           <Card title="Summary Report">
-            <Card
-              type="inner"
-              title="ชั้นประถมศึกษาปีที่ 1"
-              extra={<a href="#">More</a>}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columnStudents}
-                  dataSource={dataStudent}
-                />
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columns}
-                  dataSource={dataSource}
-                />
-              </div>
-            </Card>
-            <Card
-              style={{
-                marginTop: 16,
-              }}
-              type="inner"
-              title="ชั้นประถมศึกษาปีที่ 2"
-              extra={<a href="#">More</a>}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columnStudents}
-                  dataSource={dataStudent}
-                />
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columns}
-                  dataSource={dataSource}
-                />
-              </div>
-            </Card>
-            <Card
-              style={{
-                marginTop: 16,
-              }}
-              type="inner"
-              title="ชั้นประถมศึกษาปีที่ 3"
-              extra={<a href="#">More</a>}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columnStudents}
-                  dataSource={dataStudent}
-                />
-                <Table
-                  style={{ width: "49%" }}
-                  columns={columns}
-                  dataSource={dataSource}
-                />
-              </div>
-            </Card>
+            {[1, 2, 3].map((level) => (
+              <Card
+                key={`grade${level}`}
+                type="inner"
+                title={`ชั้นประถมศึกษาปีที่ ${level}`}
+                style={{
+                  marginTop: level === 1 ? 0 : 16,
+                }}
+              >
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Table
+                    style={{ width: "49%" }}
+                    columns={columnStudents}
+                    dataSource={dataStudent[`dataStudentGrade${level}`]}
+                  />
+                  <Table
+                    style={{ width: "49%" }}
+                    columns={columnsClass}
+                    dataSource={dataClassroom[`dataClassroomGrade${level}`]}
+                  />
+                </div>
+              </Card>
+            ))}
           </Card>
         </Content>
         <Footer />
@@ -168,4 +135,5 @@ const App = () => {
     </Layout>
   );
 };
+
 export default App;
