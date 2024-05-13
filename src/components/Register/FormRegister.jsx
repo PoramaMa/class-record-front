@@ -105,18 +105,6 @@ const FormRegister = () => {
     fetchStudentAll();
   }, []);
 
-  const [form] = Form.useForm();
-
-  const onStudent = async (values) => {
-    try {
-      await axios.post(`${url}/students`, values);
-      navigate("/students?ref=all");
-    } catch (err) {
-      alert(err.message);
-      console.log("onStudent err :: ", err);
-    }
-  };
-
   const handleSearchClassroomChange = (event) => {
     query = event.target.value;
     setDataSearchClassroom(event.target.value);
@@ -149,19 +137,55 @@ const FormRegister = () => {
     fetchStudentAll();
   };
 
+  const [form] = Form.useForm();
+
+  const selectClassroom = (classroom_id) => {
+    form.setFieldsValue({
+      classroom_id,
+    });
+    setIsSearchClassroom(false);
+    setDataSearchClassroom("");
+  };
+
+  const selectStudent = (student_id) => {
+    form.setFieldsValue({
+      student_id,
+    });
+    classroomQuery = "";
+    academicYearQuery = "";
+    gradeLevelQuery = "";
+    setIsSearchStudent(false);
+    setDataSearchStudent("");
+  };
+
+  const onStudent = async (values) => {
+    try {
+      await axios.post(`${url}/students`, values);
+      navigate("/students?ref=all");
+    } catch (err) {
+      alert(err.message);
+      console.log("onStudent err :: ", err);
+    }
+  };
+
   return (
     <div>
-      <Search
+      <div
         style={{
-          marginBottom: 20,
+          display: "flex",
+          width: 783,
+          margin: "10px auto",
         }}
-        placeholder="ค้นหา เลขที่ห้อง, ชื่อห้อง, ครูประจำชั้น"
-        loading={isSearch && isSearch}
-        onChange={handleSearchClassroomChange}
-        onFocus={() => setIsSearchClassroom(true)}
-        onBlur={() => setIsSearchClassroom(false)}
-        enterButton
-      />
+      >
+        <Search
+          placeholder="ค้นหา เลขที่ห้อง, ชื่อห้อง, ครูประจำชั้น"
+          loading={isSearch && isSearch}
+          onChange={handleSearchClassroomChange}
+          onFocus={() => setIsSearchClassroom(true)}
+          // onBlur={() => setIsSearchClassroom(false)}
+          enterButton
+        />
+      </div>
       <div
         id="scrollableDiv"
         style={{
@@ -170,6 +194,8 @@ const FormRegister = () => {
               ? "block"
               : "none",
           maxHeight: 400,
+          width: 783,
+          margin: "10px auto",
           overflow: "auto",
           padding: "0 16px",
           border: "1px solid rgba(140, 140, 140, 0.35)",
@@ -208,7 +234,7 @@ const FormRegister = () => {
                   description={`ครูประจำชั้น : ${item.teacher_name}, ป.${item.grade_level}, ปีการศึกษา ${item.academic_year}`}
                 />
                 <Button
-                  onClick={() => deleteClassroom(item.classroom_id)}
+                  onClick={() => selectClassroom(item.classroom_id)}
                   style={{ "margin-right": "5px" }}
                   type="primary"
                 >
@@ -223,6 +249,8 @@ const FormRegister = () => {
       <div
         style={{
           display: "flex",
+          width: 783,
+          margin: "auto",
         }}
       >
         <Select
@@ -269,14 +297,11 @@ const FormRegister = () => {
           ))}
         </Select>
         <Search
-          style={{
-            marginBottom: 20,
-          }}
           placeholder="ค้นหาด้วย เลขประจำตัวนักเรียน, ชื่อ, นามสกุล"
           loading={isSearch && isSearch}
           onChange={handleSearchChange}
           onFocus={() => setIsSearchStudent(true)}
-          onBlur={() => setIsSearchStudent(false)}
+          // onBlur={() => setIsSearchStudent(false)}
           enterButton
         />
       </div>
@@ -293,6 +318,8 @@ const FormRegister = () => {
               ? "block"
               : "none",
           maxHeight: 400,
+          width: 783,
+          margin: "10px auto",
           overflow: "auto",
           padding: "0 16px",
           border: "1px solid rgba(140, 140, 140, 0.35)",
@@ -332,7 +359,7 @@ const FormRegister = () => {
                 />
 
                 <Button
-                  onClick={() => deleteStudent(item.student_id)}
+                  onClick={() => selectStudent(item.student_id)}
                   style={{ margin: "0 5px" }}
                   type="primary"
                 >
@@ -347,13 +374,14 @@ const FormRegister = () => {
       <Form
         {...formItemLayout}
         form={form}
-        name="FormRegister"
+        name="register"
         onFinish={onStudent}
         initialValues={{
           residence: ["zhejiang", "hangzhou", "xihu"],
           prefix: "86",
         }}
         style={{
+          marginTop: "10px",
           maxWidth: 950,
         }}
         scrollToFirstError
@@ -364,13 +392,18 @@ const FormRegister = () => {
           rules={[
             {
               required: true,
-              message: "Please select classroom!",
             },
           ]}
         >
-          <Select placeholder="select your classroom">
-            <Option value="ด.ช.">ด.ช.</Option>
-            <Option value="ด.ญ.">ด.ญ.</Option>
+          <Select disabled={true}>
+            {dataClassroomAll.map((classroom) => (
+              <Option
+                key={classroom.classroom_id}
+                value={classroom.classroom_id}
+              >
+                {classroom.room_number} {classroom.room_name}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
 
@@ -380,14 +413,15 @@ const FormRegister = () => {
           rules={[
             {
               required: true,
-              message: "Please select student!",
             },
           ]}
         >
-          <Select placeholder="select your student">
-            <Option value="ชาย">ชาย</Option>
-            <Option value="หญิง">หญิง</Option>
-            <Option value="อื่นๆ">อื่นๆ</Option>
+          <Select disabled={true}>
+            {dataStudentAll.map((student) => (
+              <Option key={student.student_id} value={student.student_id}>
+                {student.title} {student.fname} {student.lname}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
 
