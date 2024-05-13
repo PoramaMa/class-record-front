@@ -62,7 +62,7 @@ const items = [
       },
       {
         key: "7",
-        label: "ลงทะเบียนนักเรียน",
+        label: "ลงทะเบียนเรียน",
         path: "/add-register?ref=add",
       },
     ],

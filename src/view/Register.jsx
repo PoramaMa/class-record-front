@@ -2,9 +2,9 @@ import { Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import FormRegister from "../components/Register/FormRegister";
 import ListRegister from "../components/Register/ListRegister";
 import EditStudent from "../components/Student/EditStudent";
-import FormStudent from "../components/Student/FormStudent";
 import ViewStudent from "../components/Student/ViewStudent";
 
 import Footer from "../components/Partials/Footer";
@@ -53,7 +53,7 @@ const Student = () => {
           }}
         >
           <div style={{ justifyContent: "space-between", display: "flex" }}>
-            <h3>จัดการนักเรียน </h3>
+            <h3>ลงทะเบียนเรียน </h3>
             <a
               onClick={handleGoBack}
               style={{ margin: "auto 5px" }}
@@ -71,7 +71,7 @@ const Student = () => {
             }}
           >
             {ref === "all" && <ListRegister />}
-            {ref === "add" && <FormStudent />}
+            {ref === "add" && <FormRegister />}
             {ref === "edit" && <EditStudent />}
             {ref === "detail" && <ViewStudent />}
           </div>

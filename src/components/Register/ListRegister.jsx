@@ -30,11 +30,13 @@ const ListRegister = () => {
 
   const columns = [
     {
-      title: "ลำดับ",
-      render: (text, record) => <p>{record.class_map_id}</p>,
+      title: "เลขประจำตัวนักเรียน",
+      dataIndex: "students.student_code",
+      key: "students.student_code",
+      render: (_, i) => <p>{i.students.student_code}</p>,
     },
     {
-      title: "ชื่อ-สกุล",
+      title: "ชื่อ-นามสกุล",
       dataIndex: "students.title",
       key: "students.title",
       render: (_, i) => (
@@ -92,7 +94,7 @@ const ListRegister = () => {
         width: "100%",
       }}
     >
-      <Card title="รายการลงทะเบียนทั้งหมด" extra={<a href="#">.</a>}>
+      <Card title="รายการลงทะเบียนเรียนทั้งหมด" extra={<a href="#">.</a>}>
         <Table
           dataSource={dataSource}
           columns={columns}
