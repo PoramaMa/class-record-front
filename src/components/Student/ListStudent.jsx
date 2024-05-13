@@ -204,9 +204,13 @@ const ListStudent = () => {
                 <List.Item.Meta
                   avatar={<Avatar src={img_user} />}
                   title={
-                    <a href="#">
+                    <Link
+                      to={`/view-student/${btoa(
+                        item.student_id
+                      )}?_=${uuidv4()}&ref=detail`}
+                    >
                       {item.title} {item.fname} {item.lname}
-                    </a>
+                    </Link>
                   }
                   description={`เลขประจำตัว ${item.student_code}, ป.${item.grade_level}`}
                 />

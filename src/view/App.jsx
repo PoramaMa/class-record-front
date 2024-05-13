@@ -1,6 +1,8 @@
 import { Card, Layout, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import Footer from "../components/Partials/Footer";
 import Header from "../components/Partials/Header";
 import SideBar from "../components/Partials/SideBar";
@@ -19,6 +21,15 @@ const columnsClass = [
     title: "ห้องเรียน",
     dataIndex: "room_name",
     key: "room_name",
+    render: (text, record) => (
+      <Link
+        to={`/view-classroom/${btoa(
+          record.classroom_id
+        )}?_=${uuidv4()}&ref=detail`}
+      >
+        {record.room_name}
+      </Link>
+    ),
   },
   {
     title: "จำนวนนักเรียนในห้อง",
@@ -35,7 +46,13 @@ const columnStudents = [
   },
   {
     title: "ชื่อจริง - นามสกุล",
-    render: (text, record) => `${record.title} ${record.fname} ${record.lname}`,
+    render: (text, record) => (
+      <Link
+        to={`/view-student/${btoa(record.student_id)}?_=${uuidv4()}&ref=detail`}
+      >
+        {record.title} {record.fname} {record.lname}{" "}
+      </Link>
+    ),
   },
 ];
 
