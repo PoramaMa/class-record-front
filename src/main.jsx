@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./view/App.jsx";
 import ClassRoom from "./view/Classroom.jsx";
-import Register from "./view/Register.jsx";
 import Student from "./view/Student.jsx";
 
 const router = createBrowserRouter([
@@ -42,14 +41,6 @@ const router = createBrowserRouter([
   {
     path: "/view-classroom/:id",
     element: <ClassRoom />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/add-register",
-    element: <Register />,
   },
 ]);
 

@@ -161,7 +161,7 @@ const ViewClassroom = () => {
         activeTabKey={activeTabKey2}
         tabBarExtraContent={
           <Button type="primary" onClick={showModal}>
-            เพิ่มนักเรียน
+            เพิ่มนักเรียนเข้าห้อง
           </Button>
         }
         onTabChange={onTab2Change}

@@ -45,11 +45,12 @@ const StudentInClass = () => {
       await new Promise((resolve) => {
         Modal.confirm({
           title: "ยืนยันการลบ",
-          content: "คุณแน่ใจหรือไม่ว่าต้องการลบนักเรียนออกจาก Classroom นี้ ?",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการนำนักเรียนออกจาก Classroom นี้ ?",
           onOk: async () => {
             try {
               await axios.delete(`${url}/class-maps/${id}`);
               await fetchClassMapByRoomId();
+              await fetchStudentById();
             } catch (err) {
               console.log("err :: ", err);
             }
@@ -108,7 +109,7 @@ const StudentInClass = () => {
             type="primary"
             danger
           >
-            ลบ
+            นำออก
           </Button>
         </Space>
       ),
