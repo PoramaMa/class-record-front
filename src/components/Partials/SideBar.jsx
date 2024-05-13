@@ -69,13 +69,22 @@ const SideBar = () => {
         <div
           className="demo-logo-vertical"
           style={{
-            height: "40px",
-            width: "90%",
+            width: "95%",
             borderRadius: "10px",
             backgroundColor: "rgba(255,255,255,.2)",
             margin: "10px auto",
           }}
-        />
+        >
+          <h3
+            style={{
+              padding: "10px 5px",
+              textAlign: "center",
+              color: "#fff",
+            }}
+          >
+            Classroom Record
+          </h3>
+        </div>
         <Menu
           theme="dark"
           mode="inline"
