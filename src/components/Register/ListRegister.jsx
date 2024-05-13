@@ -1,4 +1,4 @@
-import { Card, Space, Table } from "antd";
+import { Button, Card, Modal, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { env } from "../../env";
@@ -19,6 +19,29 @@ const ListRegister = () => {
   useEffect(() => {
     fetchRegister();
   }, []);
+
+  const deleteClassMap = async (id) => {
+    try {
+      const confirmResult = await new Promise((resolve) => {
+        Modal.confirm({
+          title: "ยืนยันการลบ",
+          content: "คุณแน่ใจหรือไม่ว่าต้องการลบการลงทะเบียนนี้ ?",
+          onOk: async () => {
+            try {
+              await axios.delete(`${url}/class-maps/${id}`);
+              await fetchRegister();
+            } catch (err) {
+              console.log("err :: ", err);
+            }
+            resolve(true);
+          },
+          onCancel: () => resolve(false),
+        });
+      });
+    } catch (err) {
+      console.log("err :: ", err);
+    }
+  };
 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -81,6 +104,22 @@ const ListRegister = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       render: (_, i) => <p>{formatDate(i.createdAt)}</p>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, i) => (
+        <Space size="middle">
+          <Button
+            onClick={() => deleteClassMap(i.class_map_id)}
+            style={{ "margin-right": "5px" }}
+            type="primary"
+            danger
+          >
+            ลบ
+          </Button>
+        </Space>
+      ),
     },
   ];
 
