@@ -92,6 +92,11 @@ const App = () => {
             {[1, 2, 3].map((level) => (
               <Card
                 key={`grade${level}`}
+                extra={`จำนวนทั้งหมด นักเรียน : ${
+                  dataStudent[`dataStudentGrade${level}`]?.length || 0
+                } / ห้อง : ${
+                  dataClassroom[`dataClassroomGrade${level}`]?.length || 0
+                } `}
                 type="inner"
                 title={`ชั้นประถมศึกษาปีที่ ${level}`}
                 style={{
