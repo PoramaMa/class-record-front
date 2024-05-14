@@ -100,7 +100,7 @@ const EditClassroom = () => {
         prefix: "86",
       }}
       style={{
-        maxWidth: 950,
+        width: "100%",
       }}
       scrollToFirstError
     >
@@ -116,7 +116,12 @@ const EditClassroom = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item
@@ -130,7 +135,12 @@ const EditClassroom = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item
@@ -143,7 +153,13 @@ const EditClassroom = () => {
           },
         ]}
       >
-        <Select placeholder="select your Grade Level" disabled={!isEdit}>
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your Grade Level"
+          disabled={!isEdit}
+        >
           <Option value="1">ป.1</Option>
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
@@ -161,7 +177,13 @@ const EditClassroom = () => {
           },
         ]}
       >
-        <Select placeholder="select your Academic Year" disabled={!isEdit}>
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your Academic Year"
+          disabled={!isEdit}
+        >
           {[...Array(21)].map((_, index) => {
             const year = 2550 + index;
             return (
@@ -184,7 +206,12 @@ const EditClassroom = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>

@@ -64,7 +64,7 @@ const FormStudent = () => {
           prefix: "86",
         }}
         style={{
-          maxWidth: 950,
+          width: "100%",
         }}
         scrollToFirstError
       >
@@ -80,7 +80,11 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Input />
+          <Input
+            style={{
+              width: "500px",
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -93,7 +97,12 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Select placeholder="select your title">
+          <Select
+            style={{
+              width: "500px",
+            }}
+            placeholder="select your title"
+          >
             <Option value="ด.ช.">ด.ช.</Option>
             <Option value="ด.ญ.">ด.ญ.</Option>
           </Select>
@@ -111,7 +120,11 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Input />
+          <Input
+            style={{
+              width: "500px",
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -126,7 +139,11 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Input />
+          <Input
+            style={{
+              width: "500px",
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -139,7 +156,12 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Select placeholder="select your gender">
+          <Select
+            style={{
+              width: "500px",
+            }}
+            placeholder="select your gender"
+          >
             <Option value="ชาย">ชาย</Option>
             <Option value="หญิง">หญิง</Option>
             <Option value="อื่นๆ">อื่นๆ</Option>
@@ -168,7 +190,12 @@ const FormStudent = () => {
             },
           ]}
         >
-          <Select placeholder="select your Grade Level">
+          <Select
+            style={{
+              width: "500px",
+            }}
+            placeholder="select your Grade Level"
+          >
             <Option value="1">ป.1</Option>
             <Option value="2">ป.2</Option>
             <Option value="3">ป.3</Option>

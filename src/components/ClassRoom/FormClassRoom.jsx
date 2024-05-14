@@ -63,7 +63,7 @@ const FormClassroom = () => {
         prefix: "86",
       }}
       style={{
-        maxWidth: 950,
+        width: "100%",
       }}
       scrollToFirstError
     >
@@ -79,7 +79,11 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <Input />
+        <Input
+          style={{
+            width: "550px",
+          }}
+        />
       </Form.Item>
 
       <Form.Item
@@ -93,7 +97,11 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <Input />
+        <Input
+          style={{
+            width: "550px",
+          }}
+        />
       </Form.Item>
 
       <Form.Item
@@ -106,7 +114,12 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <Select placeholder="select your Grade Level">
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your Grade Level"
+        >
           <Option value="1">ป.1</Option>
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
@@ -124,7 +137,12 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <Select placeholder="select your Academic Year">
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your Academic Year"
+        >
           {[...Array(21)].map((_, index) => {
             const year = 2550 + index;
             return (
@@ -147,7 +165,11 @@ const FormClassroom = () => {
           },
         ]}
       >
-        <Input />
+        <Input
+          style={{
+            width: "550px",
+          }}
+        />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>

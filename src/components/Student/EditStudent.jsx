@@ -104,7 +104,7 @@ const ViewStudent = () => {
         prefix: "86",
       }}
       style={{
-        maxWidth: 950,
+        width: "100%",
       }}
       scrollToFirstError
     >
@@ -120,7 +120,12 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item
@@ -133,7 +138,13 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your title" disabled={!isEdit}>
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your title"
+          disabled={!isEdit}
+        >
           <Option value="ด.ช.">ด.ช.</Option>
           <Option value="ด.ญ.">ด.ญ.</Option>
         </Select>
@@ -151,7 +162,12 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item
@@ -166,7 +182,12 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Input disabled={!isEdit} />
+        <Input
+          style={{
+            width: "550px",
+          }}
+          disabled={!isEdit}
+        />
       </Form.Item>
 
       <Form.Item
@@ -179,7 +200,13 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your gender" disabled={!isEdit}>
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your gender"
+          disabled={!isEdit}
+        >
           <Option value="ชาย">ชาย</Option>
           <Option value="หญิง">หญิง</Option>
           <Option value="อื่นๆ">อื่นๆ</Option>
@@ -208,7 +235,13 @@ const ViewStudent = () => {
           },
         ]}
       >
-        <Select placeholder="select your Grade Level" disabled={!isEdit}>
+        <Select
+          style={{
+            width: "550px",
+          }}
+          placeholder="select your Grade Level"
+          disabled={!isEdit}
+        >
           <Option value="1">ป.1</Option>
           <Option value="2">ป.2</Option>
           <Option value="3">ป.3</Option>
