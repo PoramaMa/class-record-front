@@ -149,7 +149,7 @@ const ViewClassroom = () => {
           </div>
         </div>
         <hr />
-        <h3>ข้อมูลห้องเรียน ที่นักเรียนลงทะเบียนไว้</h3>
+        <h3>ข้อมูลห้องเรียนที่เข้าเรียน</h3>
         <Table
           dataSource={dataSource}
           columns={columns}
