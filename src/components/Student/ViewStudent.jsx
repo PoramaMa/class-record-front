@@ -1,7 +1,8 @@
 import { Card, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { env } from "../../env";
 
 const url = `${env.service_url}`;
@@ -85,6 +86,15 @@ const ViewClassroom = () => {
       title: "ชื่อห้อง",
       dataIndex: "room_name",
       key: "room_name",
+      render: (_, i) => (
+        <Link
+          to={`/view-classroom/${btoa(
+            i.classroom_id
+          )}?_=${uuidv4()}&ref=detail`}
+        >
+          {i.room_name}
+        </Link>
+      ),
     },
     {
       title: "ระดับชั้น",

@@ -1,7 +1,8 @@
 import { Button, Input, Modal, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { env } from "../../env";
 const { Search } = Input;
 
@@ -84,6 +85,13 @@ const StudentInClass = () => {
       title: "ชื่อ",
       dataIndex: "fname",
       key: "fname",
+      render: (_, i) => (
+        <Link
+          to={`/view-student/${btoa(i.student_id)}?_=${uuidv4()}&ref=detail`}
+        >
+          {i.fname}
+        </Link>
+      ),
     },
     {
       title: "นามสกุล",
